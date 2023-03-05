@@ -1,10 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <NavBar :disciplines="disciplines"></NavBar>
   <router-view/>
 </template>
+
+<script>
+  import NavBar from "@/components/NavBar";
+  export default {
+    components: {
+      NavBar
+    },
+    data() {
+      return {
+        disciplines: [],
+      }
+    },
+    methods: {
+      initDisciplines() {
+        this.disciplines = ['Технические средства информационных систем',
+          'Программирование',
+          'Управление проектами', 'ООП']
+      }
+    },
+    mounted() {
+      this.initDisciplines();
+    }
+  }
+</script>
 
 <style>
 #app {
