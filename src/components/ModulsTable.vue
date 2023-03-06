@@ -83,12 +83,19 @@
             </tr>
             </thead>
             <tbody class="table-striped table-group-divider table-striped" ref="body">
-            <tr v-if="checked" v-for="student in listOfStudent" :key="student.id">
+
+            <tr v-if="checked" v-for="(student, index) in listOfStudent" :key="student.id">
                 <th style="border-right: 2px solid black; border-left: 2px solid black"> {{student.id}} </th>
                 <!--                    <th style="border-right: 2px solid black"> {{student.FIO}} </th>-->
+
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.FIO"></th>
                 <th class="M1M2"><input type="number" v-model="student.m1" ></th>
                 <th style="border-right: 2px solid black" class="M1M2"><input type="number" v-model="student.m2"></th>
+                <th v-if="checked2"><input type="number" v-model="student.scope4"></th>
+                <th v-if="checked2"><input type="text" v-model="student.scopeText4"></th>
+                <!--                <th v-if="checked2">{{student.scopeText4}}</th>-->
+                <th v-if="checked2"><input type="date" v-model="student.date4"></th>
+                <th v-if="checked2" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
                 <th><input type="number" v-model="student.scope1"></th>
                 <th><input type="text" v-model="student.scopeText1"></th>
 <!--                <th>{{student.scopeText1}}</th>-->
@@ -104,11 +111,7 @@
 <!--                <th>{{student.scopeText3}}</th>-->
                 <th><input type="date" v-model="student.date3"></th>
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher3"></th>
-                <th v-if="checked2"><input type="number" v-model="student.scope4"></th>
-                <th v-if="checked2"><input type="text" v-model="student.scopeText4"></th>
-<!--                <th v-if="checked2">{{student.scopeText4}}</th>-->
-                <th v-if="checked2"><input type="date" v-model="student.date4"></th>
-                <th v-if="checked2" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
+
             </tr>
             <tr v-else :key="student.id" v-for="(student, index) in listOfStudent">
                 <th v-if="checked2" v-for="key in gridColumnsKurs" :class="[{borderSt: key.includes('id') || key.includes('FIO') || key.includes('m2')
@@ -167,14 +170,15 @@
         data() {
             return {
                 arrayHeaders: [],
+                counterForTable: 1,
 
                 gridColumns: ['id', 'FIO', 'm1', 'm2', 'scope1', 'scopeText1', 'date1', 'teacher1',
                     'scope2', 'scopeText2', 'date2', 'teacher2', 'scope3', 'scopeText3', 'date3', 'teacher3'
                 ],
                 gridColumnsKurs: [
-                    'id', 'FIO', 'm1', 'm2', 'scope1', 'scopeText1', 'date1', 'teacher1',
+                    'id', 'FIO', 'm1', 'm2', 'scope4', 'scopeText4', 'date4', 'teacher4', 'scope1', 'scopeText1', 'date1', 'teacher1',
                     'scope2', 'scopeText2', 'date2', 'teacher2', 'scope3', 'scopeText3', 'date3', 'teacher3',
-                    'scope4', 'scopeText4', 'date4', 'teacher4'
+
                 ],
                 newStudent: '',
                 listOfStudent: [],
@@ -196,6 +200,7 @@
         watch: {
             listOfStudent: {
                 handler(newVal, oldVal) {
+                    let counter = 0;
                     const a = new Date();
                     const year = a.getFullYear();
                     const month = a.getMonth() + 1;
@@ -207,7 +212,7 @@
                     this.arrayHeaders[2].date = dateString;
                     this.listOfStudent.forEach(el => {
                         if(this.type.includes('Экзамен')) {
-                            if(el.scope1 >= 45 ) {
+                            if(el.scope1 >= 45 && el.scope1 <=54) {
                                 el.scopeText1 = 'Отлично';
                             } else if(el.scope1 >= 35 && el.scope1 < 45) {
                                 el.scopeText1 = 'Хорошо';
@@ -215,11 +220,9 @@
                             else if(el.scope1 >=25 && el.scope1 < 35){
                                 el.scopeText1 = 'Удовлетворительно'
                             }
-                            else {
-                                el.scopeText1 = ''
-                            }
 
-                            if(el.scope2 >= 45 ) {
+
+                            if(el.scope2 >= 45 && el.scope2 <=54) {
                                 el.scopeText2 = 'Отлично';
                             } else if(el.scope2 >= 35 && el.scope2 < 45) {
                                 el.scopeText2 = 'Хорошо';
@@ -227,11 +230,9 @@
                             else if(el.scope2 >=25 && el.scope2 < 35){
                                 el.scopeText2 = 'Удовлетворительно'
                             }
-                            else {
-                                el.scopeText2 = ''
-                            }
 
-                            if(el.scope3 >= 45 ) {
+
+                            if(el.scope3 >= 45 && el.scope3 <=54) {
                                 el.scopeText3 = 'Отлично';
                             } else if(el.scope3 >= 35 && el.scope3 < 45) {
                                 el.scopeText3 = 'Хорошо';
@@ -239,11 +240,9 @@
                             else if(el.scope3 >=25 && el.scope3 < 35){
                                 el.scopeText3 = 'Удовлетворительно'
                             }
-                            else {
-                                el.scopeText3 = ''
-                            }
 
-                            if(el.scope4 >= 45 ) {
+
+                            if(el.scope4 >= 45 && el.scope4 <=54) {
                                 el.scopeText4 = 'Отлично';
                             } else if(el.scope4 >= 35 && el.scope4 < 45) {
                                 el.scopeText4 = 'Хорошо';
@@ -251,12 +250,10 @@
                             else if(el.scope4 >=25 && el.scope4 < 35){
                                 el.scopeText4 = 'Удовлетворительно'
                             }
-                            else {
-                                el.scopeText4 = ''
-                            }
+
 
                         } else if(this.type.includes('Зачет с оценкой')) {
-                            if(el.scope1 >= 45 ) {
+                            if(el.scope1 >= 45 && el.scope1 <=54) {
                                 el.scopeText1 = 'Отлично';
                             } else if(el.scope1 >= 35 && el.scope1 < 45) {
                                 el.scopeText1 = 'Хорошо';
@@ -264,7 +261,7 @@
                             else if(el.scope1 >=25 && el.scope1 < 35){
                                 el.scopeText1 = 'Удовлетворительно'
                             }
-                            if(el.scope2 >= 45 ) {
+                            if(el.scope2 >= 45 && el.scope2 <=54) {
                                 el.scopeText2 = 'Отлично';
                             } else if(el.scope2 >= 35 && el.scope2 < 45) {
                                 el.scopeText2 = 'Хорошо';
@@ -272,7 +269,7 @@
                             else if(el.scope2 >=25 && el.scope2 < 35){
                                 el.scopeText2 = 'Удовлетворительно'
                             }
-                            if(el.scope3 >= 45 ) {
+                            if(el.scope3 >= 45 && el.scope3 <=54) {
                                 el.scopeText3 = 'Отлично';
                             } else if(el.scope3 >= 35 && el.scope3 < 45) {
                                 el.scopeText3 = 'Хорошо';
@@ -280,7 +277,7 @@
                             else if(el.scope3 >=25 && el.scope3 < 35){
                                 el.scopeText3 = 'Удовлетворительно'
                             }
-                            if(el.scope4 >= 45 ) {
+                            if(el.scope4 >= 45 && el.scope4 <=54) {
                                 el.scopeText4 = 'Отлично';
                             } else if(el.scope4 >= 35 && el.scope4 < 45) {
                                 el.scopeText4 = 'Хорошо';
@@ -305,14 +302,17 @@
                         }
 
                     })
+                    console.log('Вотчер отработал ' + counter)
                 },
-                deep: true
+
+                deep: true,
+
             },
 
             type() {
                 this.listOfStudent.forEach(el => {
                     if(this.type.includes('Экзамен')) {
-                        if(el.scope1 >= 45 ) {
+                        if(el.scope1 >= 45 && el.scope1 <=54) {
                             el.scopeText1 = 'Отлично';
                         } else if(el.scope1 >= 35 && el.scope1 < 45) {
                             el.scopeText1 = 'Хорошо';
@@ -321,7 +321,7 @@
                             el.scopeText1 = 'Удовлетворительно'
                         }
 
-                        if(el.scope2 >= 45 ) {
+                        if(el.scope2 >= 45 && el.scope2 <= 54) {
                             el.scopeText2 = 'Отлично';
                         } else if(el.scope2 >= 35 && el.scope2 < 45) {
                             el.scopeText2 = 'Хорошо';
@@ -329,7 +329,7 @@
                         else if(el.scope2 >=25 && el.scope2 < 35){
                             el.scopeText2 = 'Удовлетворительно'
                         }
-                        if(el.scope3 >= 45 ) {
+                        if(el.scope3 >= 45 && el.scope3 <= 54) {
                             el.scopeText3 = 'Отлично';
                         } else if(el.scope3 >= 35 && el.scope3 < 45) {
                             el.scopeText3 = 'Хорошо';
@@ -337,7 +337,7 @@
                         else if(el.scope3 >=25 && el.scope3 < 35){
                             el.scopeText3 = 'Удовлетворительно'
                         }
-                        if(el.scope4 >= 45 ) {
+                        if(el.scope4 >= 45 && el.scope4 <= 54) {
                             el.scopeText4 = 'Отлично';
                         } else if(el.scope4 >= 35 && el.scope4 < 45) {
                             el.scopeText4 = 'Хорошо';
@@ -346,7 +346,7 @@
                             el.scopeText4 = 'Удовлетворительно'
                         }
                     } else if(this.type.includes('Зачет с оценкой')) {
-                        if(el.scope1 >= 45 ) {
+                        if(el.scope1 >= 45 && el.scope1 <= 54) {
                             el.scopeText1 = 'Отлично';
                         } else if(el.scope1 >= 35 && el.scope1 < 45) {
                             el.scopeText1 = 'Хорошо';
@@ -354,7 +354,7 @@
                         else if(el.scope1 >=25 && el.scope1 < 35){
                             el.scopeText1 = 'Удовлетворительно'
                         }
-                        if(el.scope2 >= 45 ) {
+                        if(el.scope2 >= 45 && el.scope2 <= 54) {
                             el.scopeText2 = 'Отлично';
                         } else if(el.scope2 >= 35 && el.scope2 < 45) {
                             el.scopeText2 = 'Хорошо';
@@ -362,7 +362,7 @@
                         else if(el.scope2 >=25 && el.scope2 < 35){
                             el.scopeText2 = 'Удовлетворительно'
                         }
-                        if(el.scope3 >= 45 ) {
+                        if(el.scope3 >= 45 && el.scope3 <= 54) {
                             el.scopeText3 = 'Отлично';
                         } else if(el.scope3 >= 35 && el.scope3 < 45) {
                             el.scopeText3 = 'Хорошо';
@@ -370,7 +370,7 @@
                         else if(el.scope3 >=25 && el.scope3 < 35){
                             el.scopeText3 = 'Удовлетворительно'
                         }
-                        if(el.scope4 >= 45 ) {
+                        if(el.scope4 >= 45 && el.scope4 <= 54) {
                             el.scopeText4 = 'Отлично';
                         } else if(el.scope4 >= 35 && el.scope4 < 45) {
                             el.scopeText4 = 'Хорошо';
@@ -398,7 +398,7 @@
             checked() {
                 this.listOfStudent.forEach(el => {
                     if((typeof el.scope1) === 'number') {
-                        if(el.scope1 < 25) {
+                        if(el.scope1 < 25 || el.scope1 > 54) {
                             el.scope1 = ''
                             el.scopeText1 =''
                         }
@@ -463,8 +463,19 @@
                     date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
                     scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
                     scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' })
-                this.NameStudent.push(this.newStudent)
-                this.newStudent = ''
+                this.newStudent = '';
+                this.sortedStudents()
+            },
+            sortedStudents() {
+                this.listOfStudent.sort((st1, st2) => {
+                    const key = 'FIO'
+                    return st1[key]?.localeCompare(st2[key])
+                })
+                let newcounter = 1;
+                this.listOfStudent.forEach(el => {
+                    el.id = newcounter;
+                    newcounter++;
+                })
             }
         }
     }
@@ -509,6 +520,24 @@
     }
     .left {
         text-align: left;
+    }
+    .demotable {
+        border-collapse: collapse;
+        counter-reset: schetchik;  /* счётчик с названием "schetchik" работает в рамках класса .demotable */
+    }
+    .demotable tr {
+        counter-increment: schetchik;  /* при встрече тега tr счётчик с названием "schetchik" увеличивается на единицу */
+    }
+    .demotable td,
+    .demotable tr:before {
+        padding: .1em .5em;
+        border: 1px solid #E7D5C0;
+    }
+    .demotable tr:before {
+        content: counter(schetchik);  /* значение счётчика с названием "schetchik" записывается в первую клетку строки */
+        display: table-cell;
+        vertical-align: middle;
+        color: #978777;
     }
 
 
