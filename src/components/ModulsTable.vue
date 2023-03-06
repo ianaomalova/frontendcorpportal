@@ -105,7 +105,7 @@
                 <th><input type="date" v-model="student.date3"></th>
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher3"></th>
                 <th v-if="checked2"><input type="number" v-model="student.scope4"></th>
-                <th><input type="text" v-model="student.scopeText4"></th>
+                <th v-if="checked2"><input type="text" v-model="student.scopeText4"></th>
 <!--                <th v-if="checked2">{{student.scopeText4}}</th>-->
                 <th v-if="checked2"><input type="date" v-model="student.date4"></th>
                 <th v-if="checked2" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
@@ -196,10 +196,6 @@
         watch: {
             listOfStudent: {
                 handler(newVal, oldVal) {
-                    const scope1 = 'отлично';
-                    const scope2 = 'хорошо';
-                    const scope3 = 'удовлетворительно';
-                    const scope4 = 'зачтено';
                     const a = new Date();
                     const year = a.getFullYear();
                     const month = a.getMonth() + 1;
@@ -219,6 +215,10 @@
                             else if(el.scope1 >=25 && el.scope1 < 35){
                                 el.scopeText1 = 'Удовлетворительно'
                             }
+                            else {
+                                el.scopeText1 = ''
+                            }
+
                             if(el.scope2 >= 45 ) {
                                 el.scopeText2 = 'Отлично';
                             } else if(el.scope2 >= 35 && el.scope2 < 45) {
@@ -227,6 +227,10 @@
                             else if(el.scope2 >=25 && el.scope2 < 35){
                                 el.scopeText2 = 'Удовлетворительно'
                             }
+                            else {
+                                el.scopeText2 = ''
+                            }
+
                             if(el.scope3 >= 45 ) {
                                 el.scopeText3 = 'Отлично';
                             } else if(el.scope3 >= 35 && el.scope3 < 45) {
@@ -235,6 +239,10 @@
                             else if(el.scope3 >=25 && el.scope3 < 35){
                                 el.scopeText3 = 'Удовлетворительно'
                             }
+                            else {
+                                el.scopeText3 = ''
+                            }
+
                             if(el.scope4 >= 45 ) {
                                 el.scopeText4 = 'Отлично';
                             } else if(el.scope4 >= 35 && el.scope4 < 45) {
@@ -243,6 +251,10 @@
                             else if(el.scope4 >=25 && el.scope4 < 35){
                                 el.scopeText4 = 'Удовлетворительно'
                             }
+                            else {
+                                el.scopeText4 = ''
+                            }
+
                         } else if(this.type.includes('Зачет с оценкой')) {
                             if(el.scope1 >= 45 ) {
                                 el.scopeText1 = 'Отлично';
@@ -276,6 +288,7 @@
                             else if(el.scope4 >=25 && el.scope4 < 35){
                                 el.scopeText4 = 'Удовлетворительно'
                             }
+
                         } else if(this.type.includes('Зачет')) {
                             if(el.scope1 !== '') {
                                 el.scopeText1 = 'Зачтено'
@@ -290,98 +303,12 @@
                                 el.scopeText4 = 'Зачтено'
                             }
                         }
-                        // return el;
+
                     })
                 },
                 deep: true
             },
-            // checked() {
-            //     if(this.checked === false) {
-            //         this.listOfStudent.forEach(el => {
-            //             if(this.type.includes('Экзамен')) {
-            //                 if(el.scope1 >= 45 ) {
-            //                     el.scopeText1 = 'Отлично';
-            //                 } else if(el.scope1 >= 35 && el.scope1 < 45) {
-            //                     el.scopeText1 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope1 >=25 && el.scope1 < 35){
-            //                     el.scopeText1 = 'Удовлетворительно'
-            //                 }
-            //                 if(el.scope2 >= 45 ) {
-            //                     el.scopeText2 = 'Отлично';
-            //                 } else if(el.scope2 >= 35 && el.scope2 < 45) {
-            //                     el.scopeText2 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope2 >=25 && el.scope2 < 35){
-            //                     el.scopeText2 = 'Удовлетворительно'
-            //                 }
-            //                 if(el.scope3 >= 45 ) {
-            //                     el.scopeText3 = 'Отлично';
-            //                 } else if(el.scope3 >= 35 && el.scope3 < 45) {
-            //                     el.scopeText3 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope3 >=25 && el.scope3 < 35){
-            //                     el.scopeText3 = 'Удовлетворительно'
-            //                 }
-            //                 if(el.scope4 >= 45 ) {
-            //                     el.scopeText4 = 'Отлично';
-            //                 } else if(el.scope4 >= 35 && el.scope4 < 45) {
-            //                     el.scopeText4 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope4 >=25 && el.scope4 < 35){
-            //                     el.scopeText4 = 'Удовлетворительно'
-            //                 }
-            //             } else if(this.type.includes('Зачет с оценкой')) {
-            //                 if(el.scope1 >= 45 ) {
-            //                     el.scopeText1 = 'Отлично';
-            //                 } else if(el.scope1 >= 35 && el.scope1 < 45) {
-            //                     el.scopeText1 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope1 >=25 && el.scope1 < 35){
-            //                     el.scopeText1 = 'Удовлетворительно'
-            //                 }
-            //                 if(el.scope2 >= 45 ) {
-            //                     el.scopeText2 = 'Отлично';
-            //                 } else if(el.scope2 >= 35 && el.scope2 < 45) {
-            //                     el.scopeText2 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope2 >=25 && el.scope2 < 35){
-            //                     el.scopeText2 = 'Удовлетворительно'
-            //                 }
-            //                 if(el.scope3 >= 45 ) {
-            //                     el.scopeText3 = 'Отлично';
-            //                 } else if(el.scope3 >= 35 && el.scope3 < 45) {
-            //                     el.scopeText3 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope3 >=25 && el.scope3 < 35){
-            //                     el.scopeText3 = 'Удовлетворительно'
-            //                 }
-            //                 if(el.scope4 >= 45 ) {
-            //                     el.scopeText4 = 'Отлично';
-            //                 } else if(el.scope4 >= 35 && el.scope4 < 45) {
-            //                     el.scopeText4 = 'Хорошо';
-            //                 }
-            //                 else if(el.scope4 >=25 && el.scope4 < 35){
-            //                     el.scopeText4 = 'Удовлетворительно'
-            //                 }
-            //             } else if(this.type.includes('Зачет')) {
-            //                 if(el.scope1 !== '') {
-            //                     el.scopeText1 = 'Зачтено'
-            //                 }
-            //                 if(el.scope2 !== '') {
-            //                     el.scopeText2 = 'Зачтено'
-            //                 }
-            //                 if(el.scope3 !== '') {
-            //                     el.scopeText3 = 'Зачтено'
-            //                 }
-            //                 if(el.scope4 !== '') {
-            //                     el.scopeText4 = 'Зачтено'
-            //                 }
-            //             }
-            //             // return el;
-            //         })
-            //     }
-            // }
+
             type() {
                 this.listOfStudent.forEach(el => {
                     if(this.type.includes('Экзамен')) {
@@ -393,6 +320,7 @@
                         else if(el.scope1 >=25 && el.scope1 < 35){
                             el.scopeText1 = 'Удовлетворительно'
                         }
+
                         if(el.scope2 >= 45 ) {
                             el.scopeText2 = 'Отлично';
                         } else if(el.scope2 >= 35 && el.scope2 < 45) {
@@ -464,9 +392,47 @@
                             el.scopeText4 = 'Зачтено'
                         }
                     }
-                    // return el;
+
                 })
-            }
+            },
+            checked() {
+                this.listOfStudent.forEach(el => {
+                    if((typeof el.scope1) === 'number') {
+                        if(el.scope1 < 25) {
+                            el.scope1 = ''
+                            el.scopeText1 =''
+                        }
+                    }
+                    if((typeof el.scope2) === 'number') {
+                        if(el.scope2 < 25) {
+                            el.scope2 = ''
+                            el.scopeText2 =''
+                        }
+                    }
+                    if((typeof el.scope3) === 'number') {
+                        if(el.scope3 < 25) {
+                            el.scope3 = ''
+                            el.scopeText3 =''
+                        }
+                    }
+                    if((typeof el.scope4) === 'number') {
+                        if(el.scope4 < 25) {
+                            el.scope4 = ''
+                            el.scopeText4 =''
+                        }
+                    }
+                    if((typeof el.m1) === 'number') {
+                        if(el.m1 < 25) {
+                            el.m1 = ''
+                        }
+                    }
+                    if((typeof el.m2) === 'number') {
+                        if(el.m2 < 25) {
+                            el.m2 = ''
+                        }
+                    }
+                })
+            },
 
         },
         methods: {
