@@ -52,8 +52,8 @@
                 <th style="border-bottom: 2px solid black; text-align:left; border-right:2px solid #0d6efd" :colspan="cols - 1" scope="col">{{Object.values(this.arrayHeaders[6]).toString()}}</th>
             </tr>
             <tr>
-                <th  rowspan="2" style="border-right: 2px solid black; border-left: 2px solid black; vertical-align: middle">№ п/п</th>
-                <th  style="vertical-align: middle" rowspan="2" >Фамилия Имя Отчество</th>
+                <th  rowspan="2" style="border-right: 2px solid black; border-left: 2px solid black; vertical-align: middle; width: 40px">№ п/п</th>
+                <th  style="vertical-align: middle;" rowspan="2" >Фамилия Имя Отчество</th>
                 <!--                <th  rowspan="2">Имя</th>-->
                 <!--                <th  rowspan="2">Отчество</th>-->
                 <th  rowspan="2" style="border-left: 2px solid black; vertical-align: middle" class="M1M2">М1</th>
@@ -66,47 +66,46 @@
             <tr>
                 <th v-if="checked2">Балл</th>
                 <th v-if="checked2">Оценка</th>
-                <th v-if="checked2">Дата</th>
+                <th v-if="checked2" style="min-width: 100px">Дата</th>
                 <th v-if="checked2">Преподаватель</th>
                 <th style="border-left: 2px solid black">Балл</th>
                 <th>Оценка</th>
-                <th>Дата</th>
+                <th style="min-width: 100px">Дата</th>
                 <th style="border-right: 2px solid black">Преподаватель</th>
                 <th>Балл</th>
                 <th>Оценка</th>
-                <th>Дата</th>
+                <th style="min-width: 100px">Дата</th>
                 <th style="border-right: 2px solid black">Преподаватель</th>
                 <th>Балл</th>
                 <th>Оценка</th>
-                <th>Дата</th>
+                <th style="min-width: 100px">Дата</th>
                 <th style="border-right: 2px solid black">Преподаватель</th>
             </tr>
             </thead>
             <tbody class="table-striped table-group-divider table-striped" ref="body">
 
             <tr v-if="checked" v-for="(student, index) in listOfStudent" :key="student.id">
-                <th style="border-right: 2px solid black; border-left: 2px solid black"> {{student.id}} </th>
-                <!--                    <th style="border-right: 2px solid black"> {{student.FIO}} </th>-->
+                <th style="border-right: 2px solid black; border-left: 2px solid black"> {{student.id}}</th>
 
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.FIO"></th>
-                <th class="M1M2"><input type="number" v-model="student.m1" ></th>
-                <th style="border-right: 2px solid black" class="M1M2"><input type="number" v-model="student.m2"></th>
-                <th v-if="checked2"><input type="number" v-model="student.scope4"></th>
+                <th class="M1M2"><input type="number" v-model="student.m1" @change="validinpm1"></th>
+                <th style="border-right: 2px solid black" class="M1M2"><input type="number" v-model="student.m2"  @change="validinpm2"></th>
+                <th v-if="checked2"><input type="number" v-model="student.scope4" @change="validinpsc4"></th>
                 <th v-if="checked2"><input type="text" v-model="student.scopeText4"></th>
                 <!--                <th v-if="checked2">{{student.scopeText4}}</th>-->
                 <th v-if="checked2"><input type="date" v-model="student.date4"></th>
                 <th v-if="checked2" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
-                <th><input type="number" v-model="student.scope1"></th>
+                <th><input type="number" v-model="student.scope1"  @change="validinpsc1" ></th>
                 <th><input type="text" v-model="student.scopeText1"></th>
 <!--                <th>{{student.scopeText1}}</th>-->
                 <th><input type="date" v-model="student.date1"></th>
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher1"></th>
-                <th><input type="number" v-model="student.scope2"></th>
+                <th><input type="number" v-model="student.scope2" @change="validinpsc2"></th>
                 <th><input type="text" v-model="student.scopeText2"></th>
 <!--                <th>{{student.scopeText2}}</th>-->
                 <th><input type="date" v-model="student.date2"></th>
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher2"></th>
-                <th><input type="number" v-model="student.scope3"></th>
+                <th><input type="number" v-model="student.scope3" @change="validinpsc3"></th>
                 <th><input type="text" v-model="student.scopeText3"></th>
 <!--                <th>{{student.scopeText3}}</th>-->
                 <th><input type="date" v-model="student.date3"></th>
@@ -125,6 +124,7 @@
                 >
                     {{student[key]}}
                 </th>
+
             </tr>
 
             </tbody>
@@ -140,7 +140,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" placeholder="Введите имя студента: " v-model="newStudent">
+                            <input type="text" placeholder="Введите имя студента: " v-on:keyup.enter="addStudent" v-model="newStudent">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" @click="addStudent" data-bs-dismiss="modal">Сохранить</button>
@@ -170,7 +170,6 @@
         data() {
             return {
                 arrayHeaders: [],
-                counterForTable: 1,
 
                 gridColumns: ['id', 'FIO', 'm1', 'm2', 'scope1', 'scopeText1', 'date1', 'teacher1',
                     'scope2', 'scopeText2', 'date2', 'teacher2', 'scope3', 'scopeText3', 'date3', 'teacher3'
@@ -187,15 +186,16 @@
                 checked: false,
                 checked2: false,
                 type: 'Экзамен',
-                NameStudent: ['Иванов Иван Иваныч', 'Петров Петр Петрович', 'Сидоров Сидр Сидорович', 'Иванов1 Иван1 Иваныч', 'Петров2 Петр2 Петрович', 'Сидоров2 Сидр2 Сидорович',
-                    'Иванов2 Иван2 Иваныч', 'Петров3 Петр Петрович',
-                    'Сидоров3 Сидр Сидорович', 'Иванов5 Иван Иваныч', 'Петров4 Петр Петрович', 'Сидоров7 Сидр Сидорович',],
+                NameStudent: [],
             }
         },
         created() {
-            this.generateID(this.NameStudent);
+            //this.getUsers();
+            //console.log(this.NameStudent);
+            this.generateID();
             //this.listOfStudent.forEach(el => console.log(el.id));
             this.headersInit();
+
         },
         watch: {
             listOfStudent: {
@@ -447,15 +447,27 @@
                     {teachers: 'Ибатулин М.Ю.',}
                 ]
             },
-            generateID(list) {
+            async generateID() {
+                try {
+                    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+                    const data = await response.json()
+                    data.forEach(el => {
+                        this.NameStudent.push(el.name)
+                    })
+                    
+                } catch (error) {
+                    console.error(error)
+                }
                 let counter = 1;
-                list.forEach(el => {
+                this.NameStudent.forEach(el => {
                     this.listOfStudent.push({id: counter, FIO : el, m1: '', m2: '', scope1: '', scopeText1: '',
                         date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
                         scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
                         scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' });
                     counter++;
                 })
+                //console.log(JSON.stringify(this.listOfStudent))
+                this.listOfStudent.forEach(el => console.log(el))
             },
             addStudent() {
                 let counter = this.listOfStudent.length + 1;
@@ -476,7 +488,75 @@
                     el.id = newcounter;
                     newcounter++;
                 })
+            },
+            async getUsers() {
+                try {
+                    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+                    const data = await response.json()
+                    data.forEach(el => {
+                        this.NameStudent.push(el.name)
+                        //console.log(el.name);
+                    })
+                    this.NameStudent.forEach(el => console.log(el))
+                } catch (error) {
+                    console.error(error)
+                }
+            },
+
+            validinpsc1() {
+                this.listOfStudent.forEach(el => {
+                    const value =  Number(el.scope1);
+                    if(value < 25 || value > 54) {
+                        el.scope1 = ''
+                        el.scopeText1 = ''
+                    }
+                })
+            },
+            validinpsc2() {
+                this.listOfStudent.forEach(el => {
+                    const value =  Number(el.scope2);
+                    if(value < 25 || value > 54) {
+                        el.scope2 = ''
+                        el.scopeText2 = ''
+                    }
+                })
+            },
+            validinpsc3() {
+                this.listOfStudent.forEach(el => {
+                    const value =  Number(el.scope3);
+                    if(value < 25 || value > 54) {
+                        el.scope3 = ''
+                        el.scopeText3 = ''
+                    }
+                })
+            },
+            validinpsc4() {
+                this.listOfStudent.forEach(el => {
+                    const value =  Number(el.scope4);
+                    if(value < 25 || value > 54) {
+                        el.scope4 = ''
+                        el.scopeText4 = ''
+                    }
+                })
+            },
+            validinpm1() {
+                this.listOfStudent.forEach(el => {
+                    const value =  Number(el.m1);
+                    if(value < 25 || value > 54) {
+                        el.m1 = ''
+                    }
+                })
+            },
+            validinpm2() {
+                this.listOfStudent.forEach(el => {
+                    const value =  Number(el.m2);
+                    if(value < 25 || value > 54) {
+                        el.m2 = ''
+                    }
+                })
             }
+
+
         }
     }
 </script>
@@ -515,30 +595,13 @@
     .borderLeftID {
         border-left: 2px solid black
     }
-    grayCol {
+    .grayCol {
         background: gray;
     }
     .left {
         text-align: left;
     }
-    .demotable {
-        border-collapse: collapse;
-        counter-reset: schetchik;  /* счётчик с названием "schetchik" работает в рамках класса .demotable */
-    }
-    .demotable tr {
-        counter-increment: schetchik;  /* при встрече тега tr счётчик с названием "schetchik" увеличивается на единицу */
-    }
-    .demotable td,
-    .demotable tr:before {
-        padding: .1em .5em;
-        border: 1px solid #E7D5C0;
-    }
-    .demotable tr:before {
-        content: counter(schetchik);  /* значение счётчика с названием "schetchik" записывается в первую клетку строки */
-        display: table-cell;
-        vertical-align: middle;
-        color: #978777;
-    }
+
 
 
 </style>

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light curs" style="background-image: url(https://phonoteka.org/uploads/posts/2022-01/1643277308_4-phonoteka-org-p-sinii-fon-dlya-menyu-5.jpg)">
         <div class="container-fluid">
-            <a class="navbar-brand" @click="this.$router.push('/')"><img :src="logo" alt="" width="55" height="35" class="d-inline-block align-text-top"></a>
+            <a class="navbar-brand" @click="this.$router.push('/')"><img :src="path" alt="" width="55" height="35" class="d-inline-block align-text-top"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,7 +22,7 @@
                     <!--                                @click="this.$router.push('/modals')">Модульные журналы</a>-->
                     <!--                    </li>-->
                     <li class="nav-item dropdown">
-                        <a :class="{active: this.$route.path !== '/'}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a :class="{active: this.$route.path === '/moduls/:name'}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Модульные журналы
                         </a>
                         <ul class="dropdown-menu" >
@@ -57,9 +57,7 @@
         },
         data() {
             return {
-                logo: 'https://psv4.userapi.com/c240331/u178121633/docs/d40/cf9b9e1b9bfb/UITS.png?extra=KTrHKHNBV3ONr_' +
-                    'xCVhEnsDIxbMH0TYURvQeNuo0FlfFsrGXKUKOqLqqOpwCjm4pgh0ZDEMDDD9bsj9gXK9fWGsoJ0ARlsbdcbiRGc9RJIG4xQvYgmtcc' +
-                    'Jo9WBeM6MH8DU0vM5KxSfWobN-cT4i2bg6lrJXt7',
+                path: '/images/UITS.png'
             }
         }
     }
