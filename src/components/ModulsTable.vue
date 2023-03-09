@@ -8,8 +8,8 @@
             <label class="form-check-label"><input class="form-check-input" type="checkbox" v-model="checked2">Курсовой проект</label>
         </form>
     </div>
-    <div>
-        <select v-model="type" name="Type" id="Type">
+    <div class="d-flex justify-content-center">
+        <select v-model="type" name="Type" id="Type" class="form-select form-select-sm mx-auto" style="max-width: 8%" aria-label=".form-select-sm example">
             <option value="Зачет" selected="selected">Зачет</option>
             <option value="Зачет с оценкой">Зачет с оценкой</option>
             <option value="Экзамен">Экзамен</option>
@@ -93,35 +93,38 @@
             <tr v-if="checked" v-for="(student, index) in listOfStudent" :key="student.id">
                 <th style="border-right: 2px solid black; border-left: 2px solid black"> {{student.id}}</th>
 
-                <th style="border-right: 2px solid black"><input type="text" v-model="student.FIO"></th>
-                <th class="M1M2 table-fit"><input type="number" v-model="student.m1" @change="validinpm1"></th>
-                <th style="border-right: 2px solid black" class="M1M2 table-fit"><input type="number" v-model="student.m2"  @change="validinpm2"></th>
-                <th v-if="checked2" class="table-fit"><input type="number" v-model="student.scope4" @change="validinpsc4"></th>
-                <th v-if="checked2" class="table-fit"><input type="text" v-model="student.scopeText4"></th>
+                <th style="border-right: 2px solid black"><input class="form-control"  style="font-size: 12px" type="text" v-model="student.FIO"></th>
+                <th class="M1M2 table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.m1" @change="validinpm1"></th>
+                <th style="border-right: 2px solid black" class="M1M2 table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.m2"  @change="validinpm2"></th>
+                <th v-if="checked2" class="table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope4" @change="validinpsc4"></th>
+                <th v-if="checked2" class="table-fit"><input class="form-control" style="min-width: 150px" type="text" v-model="student.scopeText4"></th>
                 <!--                <th v-if="checked2">{{student.scopeText4}}</th>-->
-                <th v-if="checked2" class="table-fit"><input type="date" v-model="student.date4"></th>
-                <th v-if="checked2" class="table-fit" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
-                <th class="table-fit"><input type="number" v-model="student.scope1"  @change="validinpsc1" ></th>
-                <th class="table-fit"><input type="text" v-model="student.scopeText1"></th>
+                <th v-if="checked2" class="table-fit"><input class="form-control" type="date" v-model="student.date4"></th>
+                <th v-if="checked2" class="table-fit" style="border-right: 2px solid black"><select class="form-select form-select-sm mx-auto" aria-label=".form-select-sm example" name=""  v-model="student.teacher4">
+                    <option disabled value="">Выберите преподавателя</option>
+                    <option v-for="(teacher, index) in teachers" :key="index">{{teacher}}</option>
+                </select></th>
+                <th class="table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope1"  @change="validinpsc1" ></th>
+                <th class="table-fit"><input class="form-control" style="min-width: 150px" type="text" v-model="student.scopeText1"></th>
 <!--                <th>{{student.scopeText1}}</th>-->
-                <th class="table-fit"><input type="date" v-model="student.date1"></th>
-                <th class="table-fit" style="border-right: 2px solid black"><select name="" id="" v-model="student.teacher1">
+                <th class="table-fit"><input class="form-control" type="date" v-model="student.date1"></th>
+                <th class="table-fit" style="border-right: 2px solid black"><select class="form-select form-select-sm mx-auto" aria-label=".form-select-sm example" name="" id="" v-model="student.teacher1">
                     <option disabled value="">Выберите преподавателя</option>
                     <option v-for="(teacher, index) in teachers" :key="index">{{teacher}}</option>
                 </select></th>
-                <th class="table-fit"><input type="number" v-model="student.scope2" @change="validinpsc2"></th>
-                <th class="table-fit"><input type="text" v-model="student.scopeText2"></th>
+                <th class="table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope2" @change="validinpsc2"></th>
+                <th class="table-fit"><input class="form-control" style="min-width: 150px" type="text" v-model="student.scopeText2"></th>
 <!--                <th>{{student.scopeText2}}</th>-->
-                <th class="table-fit"><input type="date" v-model="student.date2"></th>
-                <th class="table-fit" style="border-right: 2px solid black"><select name=""  v-model="student.teacher2">
+                <th class="table-fit"><input class="form-control" type="date" v-model="student.date2"></th>
+                <th class="table-fit" style="border-right: 2px solid black"><select class="form-select form-select-sm mx-auto" aria-label=".form-select-sm example" name=""  v-model="student.teacher2">
                     <option disabled value="">Выберите преподавателя</option>
                     <option v-for="(teacher, index) in teachers" :key="index">{{teacher}}</option>
                 </select></th>
-                <th class="table-fit" ><input type="number" v-model="student.scope3" @change="validinpsc3"></th>
-                <th class="table-fit"><input type="text" v-model="student.scopeText3"></th>
+                <th class="table-fit" ><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope3" @change="validinpsc3"></th>
+                <th class="table-fit"><input class="form-control" type="text" style="min-width: 150px" v-model="student.scopeText3"></th>
 <!--                <th>{{student.scopeText3}}</th>-->
-                <th class="table-fit"><input type="date" v-model="student.date3"></th>
-                <th class="table-fit" style="border-right: 2px solid black"><input type="text" v-model="student.teacher3"></th>
+                <th class="table-fit"><input class="form-control form-control-sm" type="date" v-model="student.date3"></th>
+                <th class="table-fit" style="border-right: 2px solid black"><input class="form-control" type="text" v-model="student.teacher3"></th>
 
             </tr>
             <tr v-else :key="student.id" v-for="(student, index) in listOfStudent">
@@ -469,7 +472,7 @@
                     {discipline: this.$route.params.name},
                     {group: this.currentGroup},
                     {department: 'УИТС'},
-                    {teachers: ['Ибатулин М.Ю.','Чеканин В.А',]}
+                    {teachers: ['Ибатулин М.Ю.','Чеканин В.А', 'Бычкова Н.А.']}
                 ]
 
             },
@@ -633,7 +636,15 @@
     .left {
         text-align: left;
     }
-
+    .table select.form-select {
+        width: auto;
+        min-width: 100%;
+    }
+    .form-control {
+        height: 30px;
+        font-size: 14px;
+        padding: 4px 8px;
+    }
 
 
 </style>
