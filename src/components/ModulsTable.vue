@@ -15,6 +15,12 @@
             <option value="Экзамен">Экзамен</option>
         </select>
     </div>
+<!--    <div>-->
+<!--        <select name="" v-model="selectedTeacher">-->
+<!--            <option disabled value="">Выберите преподавателя</option>-->
+<!--            <option v-for="(teacher, index) in teachers" :key="index" v-model="listOfStudent.teacher1">{{teacher}}</option>-->
+<!--        </select>-->
+<!--    </div>-->
     <div class="table-responsive">
         <table class="table table-hover table-bordered border-primary">
             <thead style="font-size: 10px; height: auto">
@@ -88,37 +94,43 @@
                 <th style="border-right: 2px solid black; border-left: 2px solid black"> {{student.id}}</th>
 
                 <th style="border-right: 2px solid black"><input type="text" v-model="student.FIO"></th>
-                <th class="M1M2"><input type="number" v-model="student.m1" @change="validinpm1"></th>
-                <th style="border-right: 2px solid black" class="M1M2"><input type="number" v-model="student.m2"  @change="validinpm2"></th>
-                <th v-if="checked2"><input type="number" v-model="student.scope4" @change="validinpsc4"></th>
-                <th v-if="checked2"><input type="text" v-model="student.scopeText4"></th>
+                <th class="M1M2 table-fit"><input type="number" v-model="student.m1" @change="validinpm1"></th>
+                <th style="border-right: 2px solid black" class="M1M2 table-fit"><input type="number" v-model="student.m2"  @change="validinpm2"></th>
+                <th v-if="checked2" class="table-fit"><input type="number" v-model="student.scope4" @change="validinpsc4"></th>
+                <th v-if="checked2" class="table-fit"><input type="text" v-model="student.scopeText4"></th>
                 <!--                <th v-if="checked2">{{student.scopeText4}}</th>-->
-                <th v-if="checked2"><input type="date" v-model="student.date4"></th>
-                <th v-if="checked2" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
-                <th><input type="number" v-model="student.scope1"  @change="validinpsc1" ></th>
-                <th><input type="text" v-model="student.scopeText1"></th>
+                <th v-if="checked2" class="table-fit"><input type="date" v-model="student.date4"></th>
+                <th v-if="checked2" class="table-fit" style="border-right: 2px solid black"><input type="text" v-model="student.teacher4"></th>
+                <th class="table-fit"><input type="number" v-model="student.scope1"  @change="validinpsc1" ></th>
+                <th class="table-fit"><input type="text" v-model="student.scopeText1"></th>
 <!--                <th>{{student.scopeText1}}</th>-->
-                <th><input type="date" v-model="student.date1"></th>
-                <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher1"></th>
-                <th><input type="number" v-model="student.scope2" @change="validinpsc2"></th>
-                <th><input type="text" v-model="student.scopeText2"></th>
+                <th class="table-fit"><input type="date" v-model="student.date1"></th>
+                <th class="table-fit" style="border-right: 2px solid black"><select name="" id="" v-model="student.teacher1">
+                    <option disabled value="">Выберите преподавателя</option>
+                    <option v-for="(teacher, index) in teachers" :key="index">{{teacher}}</option>
+                </select></th>
+                <th class="table-fit"><input type="number" v-model="student.scope2" @change="validinpsc2"></th>
+                <th class="table-fit"><input type="text" v-model="student.scopeText2"></th>
 <!--                <th>{{student.scopeText2}}</th>-->
-                <th><input type="date" v-model="student.date2"></th>
-                <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher2"></th>
-                <th><input type="number" v-model="student.scope3" @change="validinpsc3"></th>
-                <th><input type="text" v-model="student.scopeText3"></th>
+                <th class="table-fit"><input type="date" v-model="student.date2"></th>
+                <th class="table-fit" style="border-right: 2px solid black"><select name=""  v-model="student.teacher2">
+                    <option disabled value="">Выберите преподавателя</option>
+                    <option v-for="(teacher, index) in teachers" :key="index">{{teacher}}</option>
+                </select></th>
+                <th class="table-fit" ><input type="number" v-model="student.scope3" @change="validinpsc3"></th>
+                <th class="table-fit"><input type="text" v-model="student.scopeText3"></th>
 <!--                <th>{{student.scopeText3}}</th>-->
-                <th><input type="date" v-model="student.date3"></th>
-                <th style="border-right: 2px solid black"><input type="text" v-model="student.teacher3"></th>
+                <th class="table-fit"><input type="date" v-model="student.date3"></th>
+                <th class="table-fit" style="border-right: 2px solid black"><input type="text" v-model="student.teacher3"></th>
 
             </tr>
             <tr v-else :key="student.id" v-for="(student, index) in listOfStudent">
-                <th v-if="checked2" v-for="key in gridColumnsKurs" :class="[{borderSt: key.includes('id') || key.includes('FIO') || key.includes('m2')
+                <th class="table-fit" v-if="checked2" v-for="key in gridColumnsKurs" :class="[{borderSt: key.includes('id') || key.includes('FIO') || key.includes('m2')
                     || key.includes('teacher1') || key.includes('teacher2') || key.includes('teacher3') || key.includes('teacher4'), M1M2 : key.includes('m1') || key.includes('m2'), borderLeftID : key.includes('id')}]"
                 >
                     {{student[key]}}
                 </th>
-                <th  v-else v-for="key in gridColumns" :class="{borderSt: key.includes('id') || key.includes('FIO') || key.includes('m2')
+                <th  class="table-fit" v-else v-for="key in gridColumns" :class="{borderSt: key.includes('id') || key.includes('FIO') || key.includes('m2')
                     || key.includes('teacher1') || key.includes('teacher2') || key.includes('teacher3') || key.includes('teacher4'), M1M2 : key.includes('m1') || key.includes('m2'), borderLeftID : key.includes('id'),
                     left : key.includes('FIO')}"
                 >
@@ -159,6 +171,8 @@
 
 
 <script>
+    import axios from "axios";
+
     export default {
         props: {
             group : {
@@ -186,6 +200,7 @@
                 checked: false,
                 checked2: false,
                 type: 'Экзамен',
+                selectedTeacher: '',
                 NameStudent: [],
             }
         },
@@ -196,6 +211,16 @@
             //this.listOfStudent.forEach(el => console.log(el.id));
             this.headersInit();
 
+        },
+        computed: {
+          teachers() {
+              const teachersObj = this.arrayHeaders.find(obj => obj.teachers);
+              if(teachersObj) {
+                  return teachersObj.teachers;
+              } else {
+                  return []
+              }
+          }
         },
         watch: {
             listOfStudent: {
@@ -444,8 +469,9 @@
                     {discipline: this.$route.params.name},
                     {group: this.currentGroup},
                     {department: 'УИТС'},
-                    {teachers: 'Ибатулин М.Ю.',}
+                    {teachers: ['Ибатулин М.Ю.','Чеканин В.А',]}
                 ]
+
             },
             async generateID() {
                 try {
@@ -467,7 +493,7 @@
                     counter++;
                 })
                 //console.log(JSON.stringify(this.listOfStudent))
-                this.listOfStudent.forEach(el => console.log(el))
+                //this.listOfStudent.forEach(el => console.log(el))
             },
             addStudent() {
                 let counter = this.listOfStudent.length + 1;
@@ -491,13 +517,19 @@
             },
             async getUsers() {
                 try {
-                    const response = await fetch('https://jsonplaceholder.typicode.com/users')
-                    const data = await response.json()
-                    data.forEach(el => {
-                        this.NameStudent.push(el.name)
-                        //console.log(el.name);
+                    // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+                    // const data = await response.json()
+                    // data.forEach(el => {
+                    //     this.NameStudent.push(el.name)
+                    //     //console.log(el.name);
+                    // })
+                    const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+                    const users = response.data.name;
+                    users.forEach(el => {
+                        this.NameStudent.push(el);
                     })
-                    this.NameStudent.forEach(el => console.log(el))
+
+                    //this.NameStudent.forEach(el => console.log(el))
                 } catch (error) {
                     console.error(error)
                 }
