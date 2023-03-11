@@ -13,7 +13,7 @@
     data() {
       return {
         disciplines: [],
-        access: false
+        access: false,
       }
     },
     methods: {
@@ -39,9 +39,9 @@
     created() {
       this.checkLoginStatus()
     },
-    updated() {
-      this.checkLoginStatus()
-    }
+
+
+
   }
 </script>
 

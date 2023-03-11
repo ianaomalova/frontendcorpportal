@@ -47,7 +47,7 @@
                 //     this.errorMessage = 'Произошла ошибка при авторизации';
                 // }
                 if(this.username === 'admin' && this.password === '1') {
-                    localStorage.setItem('isLoggedIn', true);
+                    localStorage.setItem('isLoggedIn', 'true');
                     this.$router.push('/')
                 } else {
                     this.errorMessage = 'Неверный логин или пароль'
