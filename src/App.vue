@@ -1,17 +1,19 @@
 <template>
-  <NavBar :disciplines="disciplines"></NavBar>
+  <NavBar v-if="access" :disciplines="disciplines"></NavBar>
   <router-view/>
 </template>
 
 <script>
   import NavBar from "@/components/NavBar";
   export default {
+    props: ['isLoggedIn'],
     components: {
       NavBar
     },
     data() {
       return {
         disciplines: [],
+        access: false
       }
     },
     methods: {
@@ -19,10 +21,26 @@
         this.disciplines = ['Технические средства информационных систем',
           'Программирование',
           'Управление проектами', 'ООП']
+      },
+      checkLoginStatus() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn) {
+          this.access = true;
+        } else {
+          this.access = false;
+          this.$router.push('/login')
+        }
       }
     },
     mounted() {
       this.initDisciplines();
+
+    },
+    created() {
+      this.checkLoginStatus()
+    },
+    updated() {
+      this.checkLoginStatus()
     }
   }
 </script>
