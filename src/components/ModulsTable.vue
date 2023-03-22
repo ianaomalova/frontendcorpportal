@@ -176,6 +176,7 @@
 
 <script>
     import axios from "axios";
+    import {getStudent} from "@/api/ModulsTable";
 
     export default {
         props: {
@@ -484,11 +485,11 @@
                     // data.forEach(el => {
                     //     this.NameStudent.push(el.name)
                     // })
-                    const response = await axios.get("https://localhost:5001/getusers");
+                    const response = await getStudent();
                     const users = response.data;
                     console.log(users);
                     users.forEach(el => {
-                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: '', m2: '', scope1: '', scopeText1: '',
+                        this.listOfStudent.push({id: el.id, FIO : el.fio, m1: '', m2: '', scope1: '', scopeText1: '',
                             date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
                             scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
                             scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' })
