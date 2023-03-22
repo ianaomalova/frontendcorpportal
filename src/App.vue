@@ -6,7 +6,7 @@
 <script>
   import NavBar from "@/components/NavBar";
   export default {
-    props: ['isLoggedIn'],
+    // props: ['isLoggedIn'],
     components: {
       NavBar
     },

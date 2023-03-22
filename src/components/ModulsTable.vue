@@ -1,4 +1,5 @@
 <template>
+    <button @click="send">Отправить список на сервер</button>
     <!--    <button @click="editTable">Edit</button>-->
     <div class="form-check form-switch" >
         <form>
@@ -478,23 +479,32 @@
             },
             async generateID() {
                 try {
-                    const response = await fetch('https://jsonplaceholder.typicode.com/users')
-                    const data = await response.json()
-                    data.forEach(el => {
-                        this.NameStudent.push(el.name)
+                    // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+                    // const data = await response.json()
+                    // data.forEach(el => {
+                    //     this.NameStudent.push(el.name)
+                    // })
+                    const response = await axios.get("https://localhost:5001/getusers");
+                    const users = response.data;
+                    console.log(users);
+                    users.forEach(el => {
+                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: '', m2: '', scope1: '', scopeText1: '',
+                            date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
+                            scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
+                            scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' })
                     })
                     
                 } catch (error) {
                     console.error(error)
                 }
-                let counter = 1;
-                this.NameStudent.forEach(el => {
-                    this.listOfStudent.push({id: counter, FIO : el, m1: '', m2: '', scope1: '', scopeText1: '',
-                        date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
-                        scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
-                        scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' });
-                    counter++;
-                })
+                // let counter = 1;
+                // this.NameStudent.forEach(el => {
+                //     this.listOfStudent.push({id: counter, FIO : el, m1: '', m2: '', scope1: '', scopeText1: '',
+                //         date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
+                //         scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
+                //         scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' });
+                //     counter++;
+                // })
                 //console.log(JSON.stringify(this.listOfStudent))
                 //this.listOfStudent.forEach(el => console.log(el))
             },
@@ -517,6 +527,14 @@
                     el.id = newcounter;
                     newcounter++;
                 })
+            },
+            send() {
+                try {
+                    axios.post("url", this.listOfStudent)
+                } catch (e) {
+                    console.error(e)
+                }
+
             },
             async getUsers() {
                 try {

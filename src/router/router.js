@@ -33,10 +33,10 @@ const routes = [
   },
   {
     path: '/',
-    component: Main,
-    meta: {
-      requiresAuth: true
-    }
+    component: App,
+    // meta: {
+    //   requiresAuth: true
+    // }
   }
 
 ]
