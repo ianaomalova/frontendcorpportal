@@ -23,21 +23,26 @@
           'Управление проектами', 'ООП']
       },
       checkLoginStatus() {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const isLoggedIn = this.$store.getters.isLoggedIn;
         if (isLoggedIn) {
           this.access = true;
         } else {
-          this.access = false;
           this.$router.push('/login')
         }
       }
     },
-    mounted() {
-      this.initDisciplines();
 
-    },
     created() {
+      this.initDisciplines();
       this.checkLoginStatus()
+    },
+    watch: {
+      $store: {
+        handler() {
+          this.checkLoginStatus();
+        },
+        deep: true,
+      },
     },
 
 

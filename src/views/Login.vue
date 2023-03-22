@@ -17,41 +17,38 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from "axios";
+    import { mapGetters, mapActions } from "vuex";
     export default {
         data() {
             return {
-                username: '',
-                password: '',
-                errorMessage: '',
+                username: "",
+                password: "",
+                errorMessage: "",
             };
         },
+        computed: {
+            ...mapGetters(["isLoggedIn"]),
+        },
         methods: {
-             async login() {
+            async login() {
                 try {
-                    const response = await axios.get("https://localhost:5001/authorization", {
-                        params: {
-                            login: this.username,
-                            password: this.password
-                        }
-                    })
-                    const data = response.data;
-                    if(data) {
-                        localStorage.setItem('isLoggedIn', 'true');
-                        this.$router.push('/')
-                    }
-                    else {
-                        this.errorMessage = 'Неверный логин или пароль'
+                    await this.$store.dispatch("axiosLogIn", {
+                        login: this.username,
+                        password: this.password,
+                    });
+                    if (this.isLoggedIn) {
+                        localStorage.setItem("isLoggedIn", "true");
+                        this.$router.push("/");
+                        this.username = "";
+                        this.password = "";
+                        this.errorMessage = "";
+                    } else {
+                        this.errorMessage = "Неверный логин или пароль";
                     }
                 } catch (e) {
-                    console.error(e)
+                    console.error(e);
                 }
-                // if(this.username === 'admin' && this.password === '1') {
-                //     localStorage.setItem('isLoggedIn', 'true');
-                //     this.$router.push('/')
-                // } else {
-                //     this.errorMessage = 'Неверный логин или пароль'
-                // }
             },
         },
     };
