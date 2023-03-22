@@ -196,24 +196,19 @@
                 gridColumnsKurs: [
                     'id', 'FIO', 'm1', 'm2', 'scope4', 'scopeText4', 'date4', 'teacher4', 'scope1', 'scopeText1', 'date1', 'teacher1',
                     'scope2', 'scopeText2', 'date2', 'teacher2', 'scope3', 'scopeText3', 'date3', 'teacher3',
-
                 ],
                 newStudent: '',
                 listOfStudent: [],
-                //rows: 20,
                 cols: 25,
                 checked: false,
                 checked2: false,
                 type: 'Экзамен',
                 selectedTeacher: '',
-                NameStudent: [],
+                counterCols: [],
             }
         },
         created() {
-            //this.getUsers();
-            //console.log(this.NameStudent);
-            this.generateID();
-            //this.listOfStudent.forEach(el => console.log(el.id));
+            this.initStudents();
             this.headersInit();
 
         },
@@ -478,13 +473,9 @@
                 ]
 
             },
-            async generateID() {
+            async initStudents() {
                 try {
-                    // const response = await fetch('https://jsonplaceholder.typicode.com/users')
-                    // const data = await response.json()
-                    // data.forEach(el => {
-                    //     this.NameStudent.push(el.name)
-                    // })
+                    let counter = 1;
                     const response = await getStudent();
                     const users = response.data;
                     console.log(users);
@@ -493,21 +484,14 @@
                             date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
                             scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
                             scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' })
+                        this.counterCols.push(counter);
+                        this.counter ++;
                     })
+
                     
                 } catch (error) {
                     console.error(error)
                 }
-                // let counter = 1;
-                // this.NameStudent.forEach(el => {
-                //     this.listOfStudent.push({id: counter, FIO : el, m1: '', m2: '', scope1: '', scopeText1: '',
-                //         date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
-                //         scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
-                //         scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' });
-                //     counter++;
-                // })
-                //console.log(JSON.stringify(this.listOfStudent))
-                //this.listOfStudent.forEach(el => console.log(el))
             },
             addStudent() {
                 let counter = this.listOfStudent.length + 1;
@@ -536,25 +520,6 @@
                     console.error(e)
                 }
 
-            },
-            async getUsers() {
-                try {
-                    // const response = await fetch('https://jsonplaceholder.typicode.com/users')
-                    // const data = await response.json()
-                    // data.forEach(el => {
-                    //     this.NameStudent.push(el.name)
-                    //     //console.log(el.name);
-                    // })
-                    const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-                    const users = response.data.name;
-                    users.forEach(el => {
-                        this.NameStudent.push(el);
-                    })
-
-                    //this.NameStudent.forEach(el => console.log(el))
-                } catch (error) {
-                    console.error(error)
-                }
             },
 
             validinpsc1() {
