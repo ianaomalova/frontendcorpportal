@@ -27,6 +27,7 @@
         if (isLoggedIn) {
           this.access = true;
         } else {
+          this.access = false;
           this.$router.push('/login')
         }
       }

@@ -17,14 +17,18 @@ export default {
            const data = response.data;
            console.log(data);
            if(data) {
-               ctx.commit('updateIsLogIn', data)
+               ctx.commit('updateIsLogIn', true)
            }
 
        },
+        logout(ctx) {
+            ctx.commit('updateIsLogIn', false)
+            this.$router.push('/login')
+        }
     },
     mutations: {
         updateIsLogIn(state, isLogIn) {
-            state.isLoggedIn = true;
+            state.isLoggedIn = isLogIn;
         }
     },
     getters: {
