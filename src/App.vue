@@ -25,15 +25,22 @@
           'Управление проектами', 'ООП']
       },
       checkLoginStatus() {
+        console.log("AppCheck")
         const isLoggedIn = this.$store.getters.isLoggedIn;
         const isLog = localStorage.getItem('isLoggedIn')
         if (isLoggedIn || isLog) {
+          this.initDisciplines();
+          this.access = true;
+        } else if(isLoggedIn === false && isLog){
+          this.$store.dispatch('updateIsLogIn', true);
           this.initDisciplines();
           this.access = true;
         } else {
           this.access = false;
           this.$router.push('/login')
         }
+        console.log(isLoggedIn)
+        console.log(isLog)
       }
     },
 
