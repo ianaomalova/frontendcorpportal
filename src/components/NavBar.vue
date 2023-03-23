@@ -64,8 +64,8 @@
         methods: {
             // ...mapActions(["logout"]),
             logoutQ() {
-                this.$store.dispatch('logout');
-                localStorage.removeItem('isLoggedIn');
+                this.$store.dispatch('logout', this.$router);
+
             }
 
         },

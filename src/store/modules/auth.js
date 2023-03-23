@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+
     state: {
         isLoggedIn: false
     },
@@ -15,15 +16,16 @@ export default {
                }
            })
            const data = response.data;
-           console.log(data);
+           //console.log(data);
            if(data) {
                ctx.commit('updateIsLogIn', true)
            }
 
        },
-        logout(ctx) {
+        logout(ctx, router) {
+            localStorage.removeItem('isLoggedIn');
             ctx.commit('updateIsLogIn', false)
-            this.$router.push('/login')
+            router.push('/login')
         }
     },
     mutations: {
