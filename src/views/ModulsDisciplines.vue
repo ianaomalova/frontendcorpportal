@@ -1,7 +1,10 @@
 <template>
     <div>
         <h1>Текущий предмет: {{ this.$route.params.name }}</h1>
-        <ModulsTable :group="currentGroup"/>
+        <div v-if="currentGroup !== null ">
+            <ModulsTable :group="currentGroup"/>
+        </div>
+
     </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination pagination-sm justify-content-center" >
@@ -12,6 +15,8 @@
 
 <script>
     import ModulsTable from "@/components/ModulsTable";
+    import {getGroups} from "@/api/ModulsTable";
+
     export default {
         components: {
             ModulsTable
@@ -25,8 +30,11 @@
             }
         },
         methods: {
-            groupsInit() {
-                this.groups = ['ИДБ-19-09', 'ИДБ-19-10', 'ИДБ-19-11'];
+            async groupsInit() {
+                //this.groups = ['ИДБ-19-09', 'ИДБ-19-10', 'ИДБ-19-11'];
+                const response = await getGroups();
+                const data = response.data
+                this.groups = data;
                 this.currentGroup = this.groups[0];
             },
             changeGroup(group) {

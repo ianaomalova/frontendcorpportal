@@ -7,6 +7,8 @@
 
 <script>
   import NavBar from "@/components/NavBar";
+  import {getDisciplines} from "@/api/ModulsTable";
+
   export default {
     components: {
       NavBar
@@ -18,10 +20,14 @@
       }
     },
     methods: {
-      initDisciplines() {
-        this.disciplines = ['Технические средства информационных систем',
-          'Программирование',
-          'Управление проектами', 'ООП']
+      async initDisciplines() {
+        // this.disciplines = ['Технические средства информационных систем',
+        //   'Программирование',
+        //   'Управление проектами', 'ООП']
+        const response =  await getDisciplines();
+        const dt = response.data;
+        this.disciplines = dt;
+
       },
       checkLoginStatus() {
         console.log("AppCheck")

@@ -1,4 +1,5 @@
 <template>
+<div v-if="this.listOfStudent.length > 0 && this.arrayHeaders.length > 0">
     <button @click="send">Отправить список на сервер</button>
     <!--    <button @click="editTable">Edit</button>-->
     <div class="form-check form-switch" >
@@ -16,12 +17,12 @@
             <option value="Экзамен">Экзамен</option>
         </select>
     </div>
-<!--    <div>-->
-<!--        <select name="" v-model="selectedTeacher">-->
-<!--            <option disabled value="">Выберите преподавателя</option>-->
-<!--            <option v-for="(teacher, index) in teachers" :key="index" v-model="listOfStudent.teacher1">{{teacher}}</option>-->
-<!--        </select>-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--        <select name="" v-model="selectedTeacher">-->
+    <!--            <option disabled value="">Выберите преподавателя</option>-->
+    <!--            <option v-for="(teacher, index) in teachers" :key="index" v-model="listOfStudent.teacher1">{{teacher}}</option>-->
+    <!--        </select>-->
+    <!--    </div>-->
     <div class="table-responsive">
         <table class="table table-hover table-bordered border-primary">
             <thead style="font-size: 10px; height: auto">
@@ -107,7 +108,7 @@
                 </select></th>
                 <th class="table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope1"  @change="validinpsc1" ></th>
                 <th class="table-fit"><input class="form-control" style="min-width: 150px" type="text" v-model="student.scopeText1"></th>
-<!--                <th>{{student.scopeText1}}</th>-->
+                <!--                <th>{{student.scopeText1}}</th>-->
                 <th class="table-fit"><input class="form-control" type="date" v-model="student.date1"></th>
                 <th class="table-fit" style="border-right: 2px solid black"><select class="form-select form-select-sm mx-auto" aria-label=".form-select-sm example" name="" id="" v-model="student.teacher1">
                     <option disabled value="">Выберите преподавателя</option>
@@ -115,7 +116,7 @@
                 </select></th>
                 <th class="table-fit"><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope2" @change="validinpsc2"></th>
                 <th class="table-fit"><input class="form-control" style="min-width: 150px" type="text" v-model="student.scopeText2"></th>
-<!--                <th>{{student.scopeText2}}</th>-->
+                <!--                <th>{{student.scopeText2}}</th>-->
                 <th class="table-fit"><input class="form-control" type="date" v-model="student.date2"></th>
                 <th class="table-fit" style="border-right: 2px solid black"><select class="form-select form-select-sm mx-auto" aria-label=".form-select-sm example" name=""  v-model="student.teacher2">
                     <option disabled value="">Выберите преподавателя</option>
@@ -123,7 +124,7 @@
                 </select></th>
                 <th class="table-fit" ><input class="form-control" style="min-width: 40px" type="number" v-model="student.scope3" @change="validinpsc3"></th>
                 <th class="table-fit"><input class="form-control" type="text" style="min-width: 150px" v-model="student.scopeText3"></th>
-<!--                <th>{{student.scopeText3}}</th>-->
+                <!--                <th>{{student.scopeText3}}</th>-->
                 <th class="table-fit"><input class="form-control form-control-sm" type="date" v-model="student.date3"></th>
                 <th class="table-fit" style="border-right: 2px solid black"><input class="form-control" type="text" v-model="student.teacher3"></th>
 
@@ -168,6 +169,8 @@
         </table>
 
     </div>
+</div>
+    <div v-else>Loading...</div>
 
 </template>
 
@@ -176,7 +179,7 @@
 
 <script>
     import axios from "axios";
-    import {getStudent} from "@/api/ModulsTable";
+    import {getStudent, getHeaders} from "@/api/ModulsTable";
 
     export default {
         props: {
@@ -225,109 +228,112 @@
         watch: {
             listOfStudent: {
                 handler(newVal, oldVal) {
-                    let counter = 0;
-                    const a = new Date();
-                    const year = a.getFullYear();
-                    const month = a.getMonth() + 1;
-                    const day = a.getDate();
-                    const hour = a.getHours();
-                    const minutes = a.getMinutes();
-                    const seconds = a.getSeconds();
-                    let dateString = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes + ':' + seconds
-                    this.arrayHeaders[2].date = dateString;
-                    this.listOfStudent.forEach(el => {
-                        if(this.type.includes('Экзамен')) {
-                            if(el.scope1 >= 45 && el.scope1 <=54) {
-                                el.scopeText1 = 'Отлично';
-                            } else if(el.scope1 >= 35 && el.scope1 < 45) {
-                                el.scopeText1 = 'Хорошо';
-                            }
-                            else if(el.scope1 >=25 && el.scope1 < 35){
-                                el.scopeText1 = 'Удовлетворительно'
-                            }
+                    if(this.arrayHeaders.length > 0 && this.listOfStudent.length > 0) {
+                        let counter = 0;
+                        const a = new Date();
+                        const year = a.getFullYear();
+                        const month = a.getMonth() + 1;
+                        const day = a.getDate();
+                        const hour = a.getHours();
+                        const minutes = a.getMinutes();
+                        const seconds = a.getSeconds();
+                        let dateString = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes + ':' + seconds
+                        this.arrayHeaders[2].date = dateString;
+                        this.listOfStudent.forEach(el => {
+                            if(this.type.includes('Экзамен')) {
+                                if(el.scope1 >= 45 && el.scope1 <=54) {
+                                    el.scopeText1 = 'Отлично';
+                                } else if(el.scope1 >= 35 && el.scope1 < 45) {
+                                    el.scopeText1 = 'Хорошо';
+                                }
+                                else if(el.scope1 >=25 && el.scope1 < 35){
+                                    el.scopeText1 = 'Удовлетворительно'
+                                }
 
 
-                            if(el.scope2 >= 45 && el.scope2 <=54) {
-                                el.scopeText2 = 'Отлично';
-                            } else if(el.scope2 >= 35 && el.scope2 < 45) {
-                                el.scopeText2 = 'Хорошо';
-                            }
-                            else if(el.scope2 >=25 && el.scope2 < 35){
-                                el.scopeText2 = 'Удовлетворительно'
-                            }
+                                if(el.scope2 >= 45 && el.scope2 <=54) {
+                                    el.scopeText2 = 'Отлично';
+                                } else if(el.scope2 >= 35 && el.scope2 < 45) {
+                                    el.scopeText2 = 'Хорошо';
+                                }
+                                else if(el.scope2 >=25 && el.scope2 < 35){
+                                    el.scopeText2 = 'Удовлетворительно'
+                                }
 
 
-                            if(el.scope3 >= 45 && el.scope3 <=54) {
-                                el.scopeText3 = 'Отлично';
-                            } else if(el.scope3 >= 35 && el.scope3 < 45) {
-                                el.scopeText3 = 'Хорошо';
-                            }
-                            else if(el.scope3 >=25 && el.scope3 < 35){
-                                el.scopeText3 = 'Удовлетворительно'
-                            }
+                                if(el.scope3 >= 45 && el.scope3 <=54) {
+                                    el.scopeText3 = 'Отлично';
+                                } else if(el.scope3 >= 35 && el.scope3 < 45) {
+                                    el.scopeText3 = 'Хорошо';
+                                }
+                                else if(el.scope3 >=25 && el.scope3 < 35){
+                                    el.scopeText3 = 'Удовлетворительно'
+                                }
 
 
-                            if(el.scope4 >= 45 && el.scope4 <=54) {
-                                el.scopeText4 = 'Отлично';
-                            } else if(el.scope4 >= 35 && el.scope4 < 45) {
-                                el.scopeText4 = 'Хорошо';
-                            }
-                            else if(el.scope4 >=25 && el.scope4 < 35){
-                                el.scopeText4 = 'Удовлетворительно'
-                            }
+                                if(el.scope4 >= 45 && el.scope4 <=54) {
+                                    el.scopeText4 = 'Отлично';
+                                } else if(el.scope4 >= 35 && el.scope4 < 45) {
+                                    el.scopeText4 = 'Хорошо';
+                                }
+                                else if(el.scope4 >=25 && el.scope4 < 35){
+                                    el.scopeText4 = 'Удовлетворительно'
+                                }
 
 
-                        } else if(this.type.includes('Зачет с оценкой')) {
-                            if(el.scope1 >= 45 && el.scope1 <=54) {
-                                el.scopeText1 = 'Отлично';
-                            } else if(el.scope1 >= 35 && el.scope1 < 45) {
-                                el.scopeText1 = 'Хорошо';
-                            }
-                            else if(el.scope1 >=25 && el.scope1 < 35){
-                                el.scopeText1 = 'Удовлетворительно'
-                            }
-                            if(el.scope2 >= 45 && el.scope2 <=54) {
-                                el.scopeText2 = 'Отлично';
-                            } else if(el.scope2 >= 35 && el.scope2 < 45) {
-                                el.scopeText2 = 'Хорошо';
-                            }
-                            else if(el.scope2 >=25 && el.scope2 < 35){
-                                el.scopeText2 = 'Удовлетворительно'
-                            }
-                            if(el.scope3 >= 45 && el.scope3 <=54) {
-                                el.scopeText3 = 'Отлично';
-                            } else if(el.scope3 >= 35 && el.scope3 < 45) {
-                                el.scopeText3 = 'Хорошо';
-                            }
-                            else if(el.scope3 >=25 && el.scope3 < 35){
-                                el.scopeText3 = 'Удовлетворительно'
-                            }
-                            if(el.scope4 >= 45 && el.scope4 <=54) {
-                                el.scopeText4 = 'Отлично';
-                            } else if(el.scope4 >= 35 && el.scope4 < 45) {
-                                el.scopeText4 = 'Хорошо';
-                            }
-                            else if(el.scope4 >=25 && el.scope4 < 35){
-                                el.scopeText4 = 'Удовлетворительно'
+                            } else if(this.type.includes('Зачет с оценкой')) {
+                                if(el.scope1 >= 45 && el.scope1 <=54) {
+                                    el.scopeText1 = 'Отлично';
+                                } else if(el.scope1 >= 35 && el.scope1 < 45) {
+                                    el.scopeText1 = 'Хорошо';
+                                }
+                                else if(el.scope1 >=25 && el.scope1 < 35){
+                                    el.scopeText1 = 'Удовлетворительно'
+                                }
+                                if(el.scope2 >= 45 && el.scope2 <=54) {
+                                    el.scopeText2 = 'Отлично';
+                                } else if(el.scope2 >= 35 && el.scope2 < 45) {
+                                    el.scopeText2 = 'Хорошо';
+                                }
+                                else if(el.scope2 >=25 && el.scope2 < 35){
+                                    el.scopeText2 = 'Удовлетворительно'
+                                }
+                                if(el.scope3 >= 45 && el.scope3 <=54) {
+                                    el.scopeText3 = 'Отлично';
+                                } else if(el.scope3 >= 35 && el.scope3 < 45) {
+                                    el.scopeText3 = 'Хорошо';
+                                }
+                                else if(el.scope3 >=25 && el.scope3 < 35){
+                                    el.scopeText3 = 'Удовлетворительно'
+                                }
+                                if(el.scope4 >= 45 && el.scope4 <=54) {
+                                    el.scopeText4 = 'Отлично';
+                                } else if(el.scope4 >= 35 && el.scope4 < 45) {
+                                    el.scopeText4 = 'Хорошо';
+                                }
+                                else if(el.scope4 >=25 && el.scope4 < 35){
+                                    el.scopeText4 = 'Удовлетворительно'
+                                }
+
+                            } else if(this.type.includes('Зачет')) {
+                                if(el.scope1 !== '') {
+                                    el.scopeText1 = 'Зачтено'
+                                }
+                                if(el.scope2 !== '') {
+                                    el.scopeText2 = 'Зачтено'
+                                }
+                                if(el.scope3 !== '') {
+                                    el.scopeText3 = 'Зачтено'
+                                }
+                                if(el.scope4 !== '') {
+                                    el.scopeText4 = 'Зачтено'
+                                }
                             }
 
-                        } else if(this.type.includes('Зачет')) {
-                            if(el.scope1 !== '') {
-                                el.scopeText1 = 'Зачтено'
-                            }
-                            if(el.scope2 !== '') {
-                                el.scopeText2 = 'Зачтено'
-                            }
-                            if(el.scope3 !== '') {
-                                el.scopeText3 = 'Зачтено'
-                            }
-                            if(el.scope4 !== '') {
-                                el.scopeText4 = 'Зачтено'
-                            }
-                        }
+                        })
+                        console.log('Вотчер отработал ' + counter)
+                    }
 
-                    })
-                    console.log('Вотчер отработал ' + counter)
                 },
 
                 deep: true,
@@ -461,16 +467,21 @@
 
         },
         methods: {
-            headersInit() {
-                this.arrayHeaders = [
-                    {semester: 'Весенний семестр 2022/2023 учебного года'},
-                    {fieldsOfStudy: '09.03.03 «Прикладная информатика»'},
-                    {date: '26.02.2023 21:57:41'},
-                    {discipline: this.$route.params.name},
-                    {group: this.currentGroup},
-                    {department: 'УИТС'},
-                    {teachers: ['Ибатулин М.Ю.','Чеканин В.А', 'Бычкова Н.А.']}
-                ]
+            async headersInit() {
+                // this.arrayHeaders = [
+                //     {semester: 'Весенний семестр 2022/2023 учебного года'},
+                //     {fieldsOfStudy: '09.03.03 «Прикладная информатика»'},
+                //     {date: '26.02.2023 21:57:41'},
+                //     {discipline: this.$route.params.name},
+                //     {group: this.currentGroup},
+                //     {department: 'УИТС'},
+                //     {teachers: ['Ибатулин М.Ю.','Чеканин В.А', 'Бычкова Н.А.']}
+                // ]
+                const response = await getHeaders();
+                const data = response.data;
+                console.log(data);
+                this.arrayHeaders = data;
+
 
             },
             async initStudents() {
@@ -480,7 +491,7 @@
                     const users = response.data;
                     console.log(users);
                     users.forEach(el => {
-                        this.listOfStudent.push({id: el.id, FIO : el.fio, m1: '', m2: '', scope1: '', scopeText1: '',
+                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: '', m2: '', scope1: '', scopeText1: '',
                             date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
                             scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
                             scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' })
