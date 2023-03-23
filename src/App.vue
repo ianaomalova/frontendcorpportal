@@ -6,7 +6,6 @@
 <script>
   import NavBar from "@/components/NavBar";
   export default {
-    // props: ['isLoggedIn'],
     components: {
       NavBar
     },
@@ -25,6 +24,7 @@
       checkLoginStatus() {
         const isLoggedIn = this.$store.getters.isLoggedIn;
         if (isLoggedIn) {
+          this.initDisciplines();
           this.access = true;
         } else {
           this.access = false;
@@ -34,7 +34,7 @@
     },
 
     created() {
-      this.initDisciplines();
+      // this.initDisciplines();
       this.checkLoginStatus()
     },
     watch: {
