@@ -1,6 +1,5 @@
 <template>
   <NavBar v-if="access" :disciplines="disciplines"></NavBar>
-  <h1>App</h1>
   <h2 v-if="access">Вы авторизованы local</h2>
   <h2 v-if="this.$store.getters.isLoggedIn">Вы авторизованы store</h2>
   <router-view/>
