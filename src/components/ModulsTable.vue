@@ -170,7 +170,9 @@
 
     </div>
 </div>
-    <div v-else>Loading...</div>
+    <div v-else>
+        Loading...
+    </div>
 
 </template>
 
@@ -464,6 +466,7 @@
                         }
                     }
                 })
+                this.send();
             },
 
         },
@@ -481,7 +484,17 @@
                 const response = await getHeaders();
                 const data = response.data;
                 console.log(data);
+                const a = new Date();
+                const year = a.getFullYear();
+                const month = a.getMonth() + 1;
+                const day = a.getDate();
+                const hour = a.getHours();
+                const minutes = a.getMinutes();
+                const seconds = a.getSeconds();
+                let dateString = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes + ':' + seconds
                 this.arrayHeaders = data;
+                this.arrayHeaders[2].date = dateString;
+
 
 
             },
@@ -641,6 +654,8 @@
         font-size: 14px;
         padding: 4px 8px;
     }
+
+
 
 
 </style>
