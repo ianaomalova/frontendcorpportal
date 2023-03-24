@@ -10,4 +10,5 @@ export const getStudent = () => axiosInstanse.get('/students')
 export const getHeaders = () => axiosInstanse.get('/headers')
 export const getGroups = () => axiosInstanse.get('/groups')
 export  const getAuth = ({login, password}) => axiosInstanse.get('/login', {params: {login, password}})
+export const sendStudents = (students) => axiosInstanse.post('/students', students)
 

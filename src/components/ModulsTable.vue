@@ -179,7 +179,7 @@
 
 <script>
     import axios from "axios";
-    import {getStudent, getHeaders} from "@/api/ModulsTable";
+    import {getStudent, getHeaders, sendStudents} from "@/api/ModulsTable";
 
     export default {
         props: {
@@ -332,6 +332,7 @@
 
                         })
                         console.log('Вотчер отработал ' + counter)
+
                     }
 
                 },
@@ -491,10 +492,10 @@
                     const users = response.data;
                     console.log(users);
                     users.forEach(el => {
-                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: '', m2: '', scope1: '', scopeText1: '',
-                            date1: '', teacher1 :'', scope2: '', scopeText2 :'', date2 :'', teacher2 :'',
-                            scope3 : '', scopeText3 : '', date3 :'', teacher3 :'',
-                            scope4 :'', scopeText4 :'', date4 :'', teacher4 :'' })
+                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: el.m1, m2: el.m2, scope1: el.scope1, scopeText1: el.scopeText1,
+                            date1: el.date1, teacher1 :el.teacher1, scope2: el.scope2, scopeText2 :el.scopeText2, date2 :el.date2, teacher2 :el.teacher2,
+                            scope3 : el.scope3, scopeText3 : el.scopeText3, date3 :el.date3, teacher3 :el.teacher3,
+                            scope4 :el.scope4, scopeText4 :el.scopeText4, date4 :el.date4, teacher4 :el.teacher4 })
                         this.counterCols.push(counter);
                         this.counter ++;
                     })
@@ -524,9 +525,9 @@
                     newcounter++;
                 })
             },
-            send() {
+            async send() {
                 try {
-                    axios.post("url", this.listOfStudent)
+                    await sendStudents(this.listOfStudent);
                 } catch (e) {
                     console.error(e)
                 }
