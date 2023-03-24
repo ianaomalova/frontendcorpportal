@@ -1,9 +1,10 @@
 <template>
     <div>
         <h1>Текущий предмет: {{ this.$route.params.name }}</h1>
-        <div v-if="currentGroup !== null ">
+        <div v-if="currentGroup !== '' ">
             <ModulsTable :group="currentGroup"/>
         </div>
+
 
     </div>
     <nav aria-label="Page navigation example">
@@ -35,14 +36,19 @@
                 const response = await getGroups();
                 const data = response.data
                 this.groups = data;
+                // setTimeout(() => {
+                //     this.currentGroup = this.groups[0];
+                // }, 2000)
                 this.currentGroup = this.groups[0];
+                console.log(this.currentGroup);
             },
             changeGroup(group) {
                 this.currentGroup = group;
+                console.log(this.currentGroup);
             },
 
         },
-        created() {
+        mounted() {
             //Получаем с сервера группы привязанные к текущему предмету
             this.groupsInit();
 

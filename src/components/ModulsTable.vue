@@ -1,5 +1,5 @@
 <template>
-<div v-if="this.listOfStudent.length > 0 && this.arrayHeaders.length > 0">
+<div v-if="this.listOfStudent.length > 0 && this.arrayHeaders.length > 0 && this.group !== ''">
     <button @click="send">Отправить список на сервер</button>
     <!--    <button @click="editTable">Edit</button>-->
     <div class="form-check form-switch" >
@@ -187,6 +187,7 @@
         props: {
             group : {
                 type: String,
+                required: true
             },
 
         },
@@ -212,9 +213,9 @@
                 counterCols: [],
             }
         },
-        created() {
-            this.initStudents();
+        mounted() {
             this.headersInit();
+            this.initStudents();
 
         },
         computed: {
@@ -468,10 +469,31 @@
                 })
                 this.send();
             },
+            async group() {
+                if(this.group !== '') {
+                    this.listOfStudent = [];
+                    let counter = 1;
+                    const response = await getStudent(this.group);
+                    const users = response.data;
+                    console.log(users);
+                    users.forEach(el => {
+                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: el.m1, m2: el.m2, scope1: el.scope1, scopeText1: el.scopeText1,
+                            date1: el.date1, teacher1 :el.teacher1, scope2: el.scope2, scopeText2 :el.scopeText2, date2 :el.date2, teacher2 :el.teacher2,
+                            scope3 : el.scope3, scopeText3 : el.scopeText3, date3 :el.date3, teacher3 :el.teacher3,
+                            scope4 :el.scope4, scopeText4 :el.scopeText4, date4 :el.date4, teacher4 :el.teacher4 })
+                        this.counterCols.push(counter);
+                        this.counter ++;
+                    })
+                }
+                else {
+                    console.log('Пустая группа')
+                }
+            }
 
         },
         methods: {
             async headersInit() {
+                console.log('Get Headers')
                 // this.arrayHeaders = [
                 //     {semester: 'Весенний семестр 2022/2023 учебного года'},
                 //     {fieldsOfStudy: '09.03.03 «Прикладная информатика»'},
@@ -500,8 +522,15 @@
             },
             async initStudents() {
                 try {
+                    this.listOfStudent = [];
+                    console.log('1' + this.group + '1');
+                    console.log('Group: ' + this.group);
+                    if(this.group === '') {
+                        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+                    }
+                    console.log('Init Students')
                     let counter = 1;
-                    const response = await getStudent();
+                    const response = await getStudent(this.group);
                     const users = response.data;
                     console.log(users);
                     users.forEach(el => {
@@ -513,7 +542,6 @@
                         this.counter ++;
                     })
 
-                    
                 } catch (error) {
                     console.error(error)
                 }
@@ -540,7 +568,7 @@
             },
             async send() {
                 try {
-                    await sendStudents(this.listOfStudent);
+                    await sendStudents({students: this.listOfStudent, group: this.group});
                 } catch (e) {
                     console.error(e)
                 }
