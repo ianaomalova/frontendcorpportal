@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1>Текущий предмет: {{ this.$route.params.name }}</h1>
+        <h1>Модульные журналы</h1>
+<!--        <h1>Текущий предмет: {{ this.$route.params.name }}</h1>-->
         <div v-if="currentGroup !== '' ">
             <ModulsTable :group="currentGroup"/>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <NavBar v-if="access" :disciplines="disciplines"></NavBar>
-  <h2 v-if="access">Вы авторизованы local</h2>
-  <h2 v-if="this.$store.getters.isLoggedIn">Вы авторизованы store</h2>
+<!--  <h2 v-if="access">Вы авторизованы local</h2>-->
+<!--  <h2 v-if="this.$store.getters.isLoggedIn">Вы авторизованы store</h2>-->
   <router-view/>
 </template>
 
@@ -30,7 +30,6 @@
 
       },
       checkLoginStatus() {
-        console.log("AppCheck")
         const isLoggedIn = this.$store.getters.isLoggedIn;
         const isLog = localStorage.getItem('isLoggedIn')
         if (isLoggedIn || isLog) {
@@ -44,8 +43,6 @@
           this.access = false;
           this.$router.push('/login')
         }
-        console.log(isLoggedIn)
-        console.log(isLog)
       }
     },
 

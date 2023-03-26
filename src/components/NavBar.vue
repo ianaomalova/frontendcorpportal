@@ -21,8 +21,8 @@
                     <!--                                :class="{active: this.$route.path === '/modals'}"-->
                     <!--                                @click="this.$router.push('/modals')">Модульные журналы</a>-->
                     <!--                    </li>-->
-                    <li class="nav-item dropdown">
-                        <a :class="{active: this.$route.path === '/moduls/:name'}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item dropdown dropdown-hover">
+                        <a :class="{active: this.$route.path.startsWith('/moduls/')}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Модульные журналы
                         </a>
                         <ul class="dropdown-menu" >
@@ -79,5 +79,7 @@
 </script>
 
 <style scoped>
-
+    .dropdown-hover:hover .dropdown-menu {
+        display: block;
+    }
 </style>

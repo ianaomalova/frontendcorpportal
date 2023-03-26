@@ -6,7 +6,7 @@
         <form>
             <label class="form-check-label" ><input class="form-check-input" type="checkbox" v-model="checked">Режим редактирования</label>
         </form>
-        <form>
+        <form v-if="checked">
             <label class="form-check-label"><input class="form-check-input" type="checkbox" v-model="checked2">Курсовой проект</label>
         </form>
     </div>
@@ -24,11 +24,11 @@
     <!--        </select>-->
     <!--    </div>-->
     <div class="table-responsive">
-        <table class="table table-hover table-bordered border-primary">
+        <table class="table table-hover table-bordered border-primary" ref="myTable">
             <thead style="font-size: 10px; height: auto">
             <tr>
                 <!--                <td></td>-->
-                <th style="border-top:2px solid #0d6efd; border-left:2px solid #0d6efd; border-right:2px solid #0d6efd; border-bottom:2px solid #0d6efd" :colspan="cols" scope="col">{{ Object.values(this.arrayHeaders[0]).toString() }}</th>
+                <th style="border-top:2px solid #0d6efd; border-left:2px solid #0d6efd; border-right:2px solid #0d6efd; border-bottom:2px solid #0d6efd; text-align: center" :colspan="cols" scope="col">{{ Object.values(this.arrayHeaders[0]).toString() }}</th>
             </tr>
             <tr>
                 <!--                <td></td>-->
@@ -129,7 +129,7 @@
                 <th class="table-fit" style="border-right: 2px solid black"><input class="form-control" type="text" v-model="student.teacher3"></th>
 
             </tr>
-            <tr v-else :key="student.id" v-for="(student, index) in listOfStudent">
+            <tr v-else :key="student.id" v-for="(student, index) in listOfStudent" @click="handleRowClick">
                 <th class="table-fit" v-if="checked2" v-for="key in gridColumnsKurs" :class="[{borderSt: key.includes('id') || key.includes('FIO') || key.includes('m2')
                     || key.includes('teacher1') || key.includes('teacher2') || key.includes('teacher3') || key.includes('teacher4'), M1M2 : key.includes('m1') || key.includes('m2'), borderLeftID : key.includes('id')}]"
                 >
@@ -205,7 +205,7 @@
                 ],
                 newStudent: '',
                 listOfStudent: [],
-                cols: 25,
+                cols: 20,
                 checked: false,
                 checked2: false,
                 type: 'Экзамен',
@@ -492,6 +492,10 @@
 
         },
         methods: {
+            handleRowClick(event) {
+                const rowIndex = event.currentTarget.rowIndex;
+                //alert(rowIndex);
+            },
             async headersInit() {
                 console.log('Get Headers')
                 // this.arrayHeaders = [
