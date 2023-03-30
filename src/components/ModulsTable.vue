@@ -1,6 +1,6 @@
 <template>
 <div v-if="this.listOfStudent.length > 0 && this.arrayHeaders.length > 0 && this.group !== ''">
-    <button @click="send">Отправить список на сервер</button>
+<!--    <button @click="send">Отправить список на сервер</button>-->
     <!--    <button @click="editTable">Edit</button>-->
     <div class="form-check form-switch" >
         <form>
@@ -473,11 +473,11 @@
                 if(this.group !== '') {
                     this.listOfStudent = [];
                     let counter = 1;
-                    const response = await getStudent(this.group);
+                    const response = await getStudent({group_name: this.group})
                     const users = response.data;
                     console.log(users);
                     users.forEach(el => {
-                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: el.m1, m2: el.m2, scope1: el.scope1, scopeText1: el.scopeText1,
+                        this.listOfStudent.push({id: el.id, FIO : el.fio, m1: el.m1, m2: el.m2, scope1: el.scope1, scopeText1: el.scopeText1,
                             date1: el.date1, teacher1 :el.teacher1, scope2: el.scope2, scopeText2 :el.scopeText2, date2 :el.date2, teacher2 :el.teacher2,
                             scope3 : el.scope3, scopeText3 : el.scopeText3, date3 :el.date3, teacher3 :el.teacher3,
                             scope4 :el.scope4, scopeText4 :el.scopeText4, date4 :el.date4, teacher4 :el.teacher4 })
@@ -498,28 +498,28 @@
             },
             async headersInit() {
                 console.log('Get Headers')
-                // this.arrayHeaders = [
-                //     {semester: 'Весенний семестр 2022/2023 учебного года'},
-                //     {fieldsOfStudy: '09.03.03 «Прикладная информатика»'},
-                //     {date: '26.02.2023 21:57:41'},
-                //     {discipline: this.$route.params.name},
-                //     {group: this.currentGroup},
-                //     {department: 'УИТС'},
-                //     {teachers: ['Ибатулин М.Ю.','Чеканин В.А', 'Бычкова Н.А.']}
-                // ]
-                const response = await getHeaders();
-                const data = response.data;
-                console.log(data);
-                const a = new Date();
-                const year = a.getFullYear();
-                const month = a.getMonth() + 1;
-                const day = a.getDate();
-                const hour = a.getHours();
-                const minutes = a.getMinutes();
-                const seconds = a.getSeconds();
-                let dateString = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes + ':' + seconds
-                this.arrayHeaders = data;
-                this.arrayHeaders[2].date = dateString;
+                this.arrayHeaders = [
+                    {semester: 'Весенний семестр 2022/2023 учебного года'},
+                    {fieldsOfStudy: '09.03.03 «Прикладная информатика»'},
+                    {date: '26.02.2023 21:57:41'},
+                    {discipline: this.$route.params.name},
+                    {group: this.currentGroup},
+                    {department: 'УИТС'},
+                    {teachers: ['Ибатулин М.Ю.','Чеканин В.А', 'Бычкова Н.А.']}
+                ]
+                // const response = await getHeaders();
+                // const data = response.data;
+                // console.log(data);
+                // const a = new Date();
+                // const year = a.getFullYear();
+                // const month = a.getMonth() + 1;
+                // const day = a.getDate();
+                // const hour = a.getHours();
+                // const minutes = a.getMinutes();
+                // const seconds = a.getSeconds();
+                // let dateString = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes + ':' + seconds
+                // this.arrayHeaders = data;
+                // this.arrayHeaders[2].date = dateString;
 
 
 
@@ -534,11 +534,11 @@
                     }
                     console.log('Init Students')
                     let counter = 1;
-                    const response = await getStudent(this.group);
+                    const response = await getStudent({group_name: this.group})
                     const users = response.data;
                     console.log(users);
                     users.forEach(el => {
-                        this.listOfStudent.push({id: el.id, FIO : el.FIO, m1: el.m1, m2: el.m2, scope1: el.scope1, scopeText1: el.scopeText1,
+                        this.listOfStudent.push({id: el.id, FIO : el.fio, m1: el.m1, m2: el.m2, scope1: el.scope1, scopeText1: el.scopeText1,
                             date1: el.date1, teacher1 :el.teacher1, scope2: el.scope2, scopeText2 :el.scopeText2, date2 :el.date2, teacher2 :el.teacher2,
                             scope3 : el.scope3, scopeText3 : el.scopeText3, date3 :el.date3, teacher3 :el.teacher3,
                             scope4 :el.scope4, scopeText4 :el.scopeText4, date4 :el.date4, teacher4 :el.teacher4 })

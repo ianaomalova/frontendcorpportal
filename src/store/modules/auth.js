@@ -16,10 +16,12 @@ export default {
            //         password
            //     }
            // })
-           const response = await getAuth({login, password});
+           const response = await getAuth({login: 'admin', password: 'admin'});
            const data = response.data;
+           console.log(data); // должен быть выведен "Чеканин В. А."
            //console.log(data);
-           if(data) {
+           if(data !== 'false') {
+               localStorage.setItem('user', data);
                ctx.commit('updateIsLogIn', true)
            }
 

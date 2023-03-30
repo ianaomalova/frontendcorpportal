@@ -7,7 +7,7 @@
 
 <script>
   import NavBar from "@/components/NavBar";
-  import {getDisciplines} from "@/api/ModulsTable";
+  import {getDisciplines, getSubjects} from "@/api/ModulsTable";
 
   export default {
     components: {
@@ -24,7 +24,9 @@
         // this.disciplines = ['Технические средства информационных систем',
         //   'Программирование',
         //   'Управление проектами', 'ООП']
-        const response =  await getDisciplines();
+        //const response =  await getDisciplines();
+        const str = 'Чеканин В. А.'
+        const response = await getSubjects({FIO : str});
         const dt = response.data;
         this.disciplines = dt;
 
