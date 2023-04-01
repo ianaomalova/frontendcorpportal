@@ -7,6 +7,8 @@ import App from "@/App";
 import Calendar from "@/views/Calendar";
 import Main from "@/views/Main";
 import { auth } from './auth.js';
+import News from "@/views/News";
+import Ads from "@/views/Ads"
 
 const routes = [
   // {
@@ -37,7 +39,16 @@ const routes = [
     // meta: {
     //   requiresAuth: true
     // }
+  },
+  {
+    path: '/news',
+    component: News
+  },
+  {
+    path: '/ads',
+    component: Ads
   }
+
 
 ]
 

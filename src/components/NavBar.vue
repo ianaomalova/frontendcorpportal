@@ -7,7 +7,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item ">
+                    <li class="nav-item dropdown dropdown-hover">
+                        <a :class="{active: this.$route.path === '/news'}"
+                           class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            О кафедре
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a class="dropdown-item" @click="$event=>this.$router.push('/news')">Новости</a></li>
+                            <li><a class="dropdown-item" @click="$event=>this.$router.push('/ads')">Объявления</a></li>
+                        </ul>
+                    </li>
+                    <li v-if="access" class="nav-item ">
                         <a class="nav-link"
                            aria-current="page"
                            :class="{active: this.$route.path === '/calendar'}"
@@ -22,7 +32,7 @@
                     <!--                                @click="this.$router.push('/modals')">Модульные журналы</a>-->
                     <!--                    </li>-->
                     <li class="nav-item dropdown dropdown-hover">
-                        <a :class="{active: this.$route.path.startsWith('/moduls/')}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a v-if="access" :class="{active: this.$route.path.startsWith('/moduls/')}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Модульные журналы
                         </a>
                         <ul class="dropdown-menu" >
@@ -38,7 +48,8 @@
 <!--                <div style="margin-right: 15px">-->
 <!--                    <p style="margin: auto">{{User}}</p>-->
 <!--                </div>-->
-                <button type="button" class="float-right btn btn-primary" @click="logoutQ">Выйти</button>
+                <button v-if="access" type="button" class="float-right btn btn-primary" @click="logoutQ">Выйти</button>
+                <button v-if="access === false" type="button" class="float-right btn btn-primary" @click="logIn">Войти</button>
                 <!--                <form class="d-flex" role="search">-->
                 <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
                 <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
@@ -56,6 +67,10 @@
         props: {
             disciplines : {
                 type: Array
+            },
+            access: {
+                type: Boolean,
+                required: true
             }
         },
         computed: {
@@ -66,8 +81,16 @@
             logoutQ() {
                 this.$store.dispatch('logout', this.$router);
 
+            },
+            logIn() {
+                this.$router.push('/login')
             }
 
+        },
+        watch: {
+          // access() {
+          //
+          // }
         },
         data() {
             return {
