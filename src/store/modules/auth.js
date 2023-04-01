@@ -16,11 +16,13 @@ export default {
            //         password
            //     }
            // })
-           const response = await getAuth({login: 'admin', password: 'admin'});
+           const response = await getAuth({login: login, password: password});
            const data = response.data;
            console.log(data); // должен быть выведен "Чеканин В. А."
            //console.log(data);
-           if(data !== 'false') {
+           //console.log(typeof data);
+
+           if(data !== false) {
                localStorage.setItem('user', data);
                ctx.commit('updateIsLogIn', true)
            }
@@ -28,6 +30,7 @@ export default {
        },
         logout(ctx, router) {
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('user')
             ctx.commit('updateIsLogIn', false)
             router.push('/login')
         }
