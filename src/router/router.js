@@ -9,6 +9,7 @@ import Main from "@/views/Main";
 import { auth } from './auth.js';
 import News from "@/views/News";
 import Ads from "@/views/Ads"
+import DetailsNews from "@/views/DetailsNews";
 
 const routes = [
   // {
@@ -47,6 +48,10 @@ const routes = [
   {
     path: '/ads',
     component: Ads
+  },
+  {
+    path: '/news/details/:id',
+    component: DetailsNews
   }
 
 
