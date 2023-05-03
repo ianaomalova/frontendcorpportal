@@ -10,6 +10,7 @@ import { auth } from './auth.js';
 import News from "@/views/News";
 import Ads from "@/views/Ads"
 import DetailsNews from "@/views/DetailsNews";
+import Admin from "@/views/Admin.vue";
 
 const routes = [
   // {
@@ -52,6 +53,10 @@ const routes = [
   {
     path: '/news/details/:id',
     component: DetailsNews
+  },
+  {
+    path: '/admin',
+    component: Admin
   }
 
 
