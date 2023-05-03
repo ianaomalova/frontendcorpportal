@@ -95,7 +95,7 @@
     };
 </script>
 
-<style>
+<style scoped>
     .event-form {
         position: absolute;
         top: 50%;

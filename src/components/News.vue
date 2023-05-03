@@ -37,7 +37,7 @@
         },
         methods : {
             add_News(news) {
-                this.news.push(news);
+                this.news.unshift(news);
             }
         }
     }
