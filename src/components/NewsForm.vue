@@ -17,7 +17,7 @@
                     <label for="date">Дата</label>
                     <input type="date" class="form-control" id="date" v-model="date">
                 </div>
-                <button type="submit" class="btn btn-primary">Добавить новость</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px">Добавить</button>
             </form>
         </div>
     </div>
@@ -35,7 +35,7 @@
         methods: {
             addNews() {
                 const newNews = {
-                    id: Date.now().getTime(),
+                    id: new Date().getTime(),
                     title: this.title,
                     description: this.description,
                     date: this.date

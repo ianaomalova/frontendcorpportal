@@ -12,6 +12,7 @@
             </div>
         </div>
     </div>
+    <button type="button" class="btn btn-primary" @click="add">Добавить новость</button>
     <NewsForm v-if="showForms" @add_News="add_News"></NewsForm>
 
 </template>
@@ -32,12 +33,15 @@
                     {id: 5, title: 'Новость 5', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
                     {id: 6, title: 'Новость 6', description: 'Some quick прпарапрexмисмисмисмample text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
                 ],
-                showForms: true
+                showForms: false
             }
         },
         methods : {
             add_News(news) {
                 this.news.unshift(news);
+            },
+            add() {
+                this.showForms = true;
             }
         }
     }
