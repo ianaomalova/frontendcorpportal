@@ -12,8 +12,8 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary" @click="add">Добавить новость</button>
-    <NewsForm v-if="showForms" @add_News="add_News"></NewsForm>
+<!--    <button type="button" class="btn btn-primary" @click="add">Добавить новость</button>-->
+<!--    <NewsForm v-if="showForms" @add_News="add_News"></NewsForm>-->
     <!-- Button trigger modal -->
     <button style="margin-top: 10px;" type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить новость</button>
     <div ref="modalAdd" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,13 +26,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" placeholder="Заголовок: " v-model="newsObj.title">
+                    <input class="form-control" type="text" placeholder="Заголовок: " v-model="newsObj.title">
                 </div>
                 <div class="modal-body">
-                    <textarea placeholder="Описание: " v-model="newsObj.description"></textarea>
+                    <textarea class="form-control" placeholder="Описание: " v-model="newsObj.description"></textarea>
                 </div>
                 <div class="modal-body">
-                    <input type="date" placeholder="Введите имя студента: " v-model="newsObj.date">
+                    <input class="form-control" type="date" placeholder="Введите имя студента: " v-model="newsObj.date">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" @click="add_News(newsObj)" data-bs-dismiss="modal">Сохранить</button>
