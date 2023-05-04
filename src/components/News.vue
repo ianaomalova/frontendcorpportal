@@ -71,10 +71,12 @@
         },
         methods : {
             add_News(news) {
-                this.news.unshift(news);
-            },
-            add() {
-                this.showForms = true;
+                const newNews = JSON.parse(JSON.stringify(news));
+                this.news.unshift(newNews);
+                this.newsObj.title = '';
+                this.newsObj.id = '';
+                this.newsObj.description = '';
+                this.newsObj.date = '';
             },
         }
     }
