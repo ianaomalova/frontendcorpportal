@@ -8,8 +8,8 @@
                     <p class="card-text" style="height: 70px; ">{{item.description}}</p>
                     <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
                     <button type="button" class="btn btn-primary" @click.stop ="redirectToDetails(item)">Подробнее</button>
-<!--                    <br>-->
-                    <button type="button" class="btn" @click.stop ="info(item)">Edit</button>
+                    <br>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.stop ="edit(item)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                 </div>
             </div>
         </div>
@@ -55,11 +55,11 @@
         data() {
             return {
                 news: [
-                    {id: 1, title: 'Новость 1', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
-                    {id: 2, title: 'Новость 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
-                    {id: 3, title: 'Новость 3', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
-                    {id: 4, title: 'Новость 4', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
-                    {id: 5, title: 'Новость 5', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
+                    {id: 1, title: 'Новость 1', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 2, title: 'Новость 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 3, title: 'Новость 3', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 4, title: 'Новость 4', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 5, title: 'Новость 5', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
                     {id: 6, title: 'Новость 6', description: 'Some quick прпарапрexмисмисмисмample text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
                 ],
                 showForms: false,
@@ -81,11 +81,10 @@
                 this.newsObj.date = '';
             },
 
-            info(item) {
-                console.log(item.id)
-                console.log(item.title)
-                console.log(item.description)
-                console.log(item.date)
+            edit(item) {
+                this.newsObj.title = item.title;
+                this.newsObj.description = item.description;
+                this.newsObj.date = item.date;
             },
             redirectToDetails(item) {
                 this.$router.push(`/news/details/${item.id}`)
