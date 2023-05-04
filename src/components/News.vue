@@ -7,7 +7,9 @@
                     <h5 class="card-title">{{item.title}}</h5>
                     <p class="card-text" style="height: 70px; ">{{item.description}}</p>
                     <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
-                    <router-link :to="'/news/details/' + item.id" class="btn btn-primary stretched-link">Подробнее</router-link>
+                    <button type="button" class="btn btn-primary" @click.stop ="redirectToDetails(item)">Подробнее</button>
+<!--                    <br>-->
+                    <button type="button" class="btn" @click.stop ="info(item)">Edit</button>
                 </div>
             </div>
         </div>
@@ -78,6 +80,16 @@
                 this.newsObj.description = '';
                 this.newsObj.date = '';
             },
+
+            info(item) {
+                console.log(item.id)
+                console.log(item.title)
+                console.log(item.description)
+                console.log(item.date)
+            },
+            redirectToDetails(item) {
+                this.$router.push(`/news/details/${item.id}`)
+            }
         }
     }
 </script>
