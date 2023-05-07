@@ -9,7 +9,7 @@
     </div>
 
     <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3  mx-5 mb-5 justify-content-center">
-        <div class="col mb-4" v-for="item in filteredNews" :key="item.id">
+        <div v-if="filteredNews.length > 0" class="col mb-4" v-for="item in filteredNews" :key="item.id">
             <div class="card h-100 w-75" style="margin-top: 10px">
                 <img class="card-img-top" src="https://via.placeholder.com/600x400" alt="Card image cap">
                 <div class="card-body">
@@ -22,6 +22,9 @@
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal" @click.stop="this.currentId = item.id"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                 </div>
             </div>
+        </div>
+        <div v-else>
+            <h2>Ничего не найдено</h2>
         </div>
     </div>
 <!--    <button type="button" class="btn btn-primary" @click="add">Добавить новость</button>-->
