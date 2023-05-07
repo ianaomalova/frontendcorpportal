@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <h1>Admin panel</h1>
-    </div>
+    <Users></Users>
 </template>
 
 <script>
+    import Users from "@/components/admins/Users";
 export default {
+    components: {
+        Users
+    }
 
 }
 </script>
