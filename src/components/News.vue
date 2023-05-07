@@ -1,7 +1,16 @@
 <template>
-    <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-4 mx-3 mb-5 justify-content-center">
-        <div class="col mb-4" v-for="item in news" :key="item.id">
-            <div class="card h-100 w-75">
+    <button style="margin-top: 15px; margin-bottom: 20px" type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить новость</button>
+    <div class="input-group" style="max-width: 300px; margin-bottom: 25px; margin-left: 15px">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><img src="icons/search_FILL0_wght400_GRAD0_opsz24.png" alt=""></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery">
+    </div>
+
+
+    <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3  mx-5 mb-5 justify-content-center">
+        <div class="col mb-4" v-for="item in filteredNews" :key="item.id">
+            <div class="card h-100 w-75" style="margin-top: 10px">
                 <img class="card-img-top" src="https://via.placeholder.com/600x400" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{item.title}}</h5>
@@ -18,7 +27,7 @@
 <!--    <button type="button" class="btn btn-primary" @click="add">Добавить новость</button>-->
 <!--    <NewsForm v-if="showForms" @add_News="add_News"></NewsForm>-->
     <!-- Button trigger modal -->
-    <button style="margin-top: 10px;" type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить новость</button>
+<!--    <button style="margin-top: 5px;" type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить новость</button>-->
     <div ref="modalAdd" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -74,12 +83,12 @@
         data() {
             return {
                 news: [
-                    {id: 1, title: 'Новость 1', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 2, title: 'Новость 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 3, title: 'Новость 3', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 4, title: 'Новость 4', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 5, title: 'Новость 5', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 6, title: 'Новость 6', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 1, title: 'Булка', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 2, title: 'булка 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 3, title: 'Хлебушек', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 4, title: 'Носок', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 5, title: 'Чаечек', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 6, title: 'Хлебушек 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
                 ],
                 showForms: false,
                 newsObj : {
@@ -89,6 +98,7 @@
                     date: ''
                 },
                 currentId: '',
+                searchQuery: '',
             }
         },
         methods : {
@@ -125,6 +135,11 @@
                 const id = itemId;
                 this.news = this.news.filter(el => el.id !== id);
                 this.currentId = '';
+            }
+        },
+        computed: {
+            filteredNews() {
+                return this.news.filter(el => el.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
             }
         }
     }
