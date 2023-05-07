@@ -93,6 +93,10 @@
         },
         methods : {
             add_News(news) {
+                if(this.currentId !== '') {
+                    this.remove(this.currentId);
+                    this.currentId = '';
+                }
                 const newNews = JSON.parse(JSON.stringify(news));
                 newNews.id = new Date().getTime();
                 this.news.unshift(newNews);
@@ -103,11 +107,14 @@
             },
 
             edit(item) {
+                this.currentId = item.id;
                 const newNews = JSON.parse(JSON.stringify(item));
                 this.newsObj.id = newNews.id;
                 this.newsObj.title = newNews.title;
                 this.newsObj.description = newNews.description;
                 this.newsObj.date = newNews.date;
+                //this.remove(newNews.id);
+                // this.add_News(newNews);
             },
 
             redirectToDetails(item) {
@@ -117,6 +124,7 @@
             remove(itemId) {
                 const id = itemId;
                 this.news = this.news.filter(el => el.id !== id);
+                this.currentId = '';
             }
         }
     }
