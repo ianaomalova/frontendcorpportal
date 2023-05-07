@@ -5,8 +5,8 @@
             <span class="input-group-text"><img src="icons/search_FILL0_wght400_GRAD0_opsz24.png" alt=""></span>
         </div>
         <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery">
-    </div>
 
+    </div>
 
     <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3  mx-5 mb-5 justify-content-center">
         <div class="col mb-4" v-for="item in filteredNews" :key="item.id">

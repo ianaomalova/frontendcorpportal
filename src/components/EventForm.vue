@@ -5,26 +5,26 @@
             <form @submit.prevent="submitEvent" class="event-form">
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input v-model="task.title" type="text" id="title" required />
+                    <input v-model="task.title" type="text" id="title" class="form-control" required />
                 </div>
                 <div class="form-group">
                     <label for="dateStart">Start date:</label>
-                    <input v-model="task.dateStart" type="date" id="dateStart" required />
+                    <input v-model="task.dateStart" type="date" id="dateStart" class="form-control" required />
                 </div>
                 <div class="form-group">
                     <label for="dateEnd">End date:</label>
-                    <input v-model="task.dateEnd" type="date" id="dateEnd" required />
+                    <input v-model="task.dateEnd" type="date" id="dateEnd" class="form-control" required />
                 </div>
                 <div class="form-group">
                     <label for="timeStart">Start time:</label>
-                    <input v-model="task.timeStart" type="time" id="timeStart" required />
+                    <input v-model="task.timeStart" type="time" id="timeStart" class="form-control" required />
                 </div>
                 <div class="form-group">
                     <label for="timeEnd">End time:</label>
-                    <input v-model="task.timeEnd" type="time" id="timeEnd" required />
+                    <input v-model="task.timeEnd" type="time" id="timeEnd" class="form-control" required />
                 </div>
                 <div>
-                    <select v-model="task.color" name="color" id="color">
+                    <select v-model="task.color" name="color" id="color" class="form-select">
                         <option value="green" selected="selected">Зеленый</option>
                         <option value="yellow">Желтый</option>
                         <option value="blue">Голубой</option>
@@ -32,7 +32,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 15px">Сохранить</button>
                 </div>
             </form>
             <button class="close-button" @click="$emit('close')">X</button>
@@ -145,25 +145,25 @@
         margin-bottom: 5px;
     }
 
-    input[type='text'],
-    input[type='date'],
-    input[type='time'] {
-        border: 1px solid black;
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 16px;
-        margin-bottom: 5px;
-    }
+    /*input[type='text'],*/
+    /*input[type='date'],*/
+    /*input[type='time'] {*/
+    /*    border: 1px solid black;*/
+    /*    border-radius: 5px;*/
+    /*    padding: 10px;*/
+    /*    font-size: 16px;*/
+    /*    margin-bottom: 5px;*/
+    /*}*/
 
-    button[type='submit'] {
-        background-color: #008cba;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+    /*button[type='submit'] {*/
+    /*    background-color: #008cba;*/
+    /*    color: white;*/
+    /*    border: none;*/
+    /*    border-radius: 5px;*/
+    /*    padding: 10px;*/
+    /*    font-size: 16px;*/
+    /*    cursor: pointer;*/
+    /*}*/
 
     .close-button {
         position: absolute;
