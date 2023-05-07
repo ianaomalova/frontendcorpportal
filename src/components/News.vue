@@ -10,6 +10,7 @@
                     <button type="button" class="btn btn-primary" @click.stop ="redirectToDetails(item)">Подробнее</button>
                     <br>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.stop ="edit(item)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal" @click.stop="this.currentId = item.id"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                 </div>
             </div>
         </div>
@@ -43,6 +44,24 @@
         </div>
     </div>
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Удалить новость</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить новость?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remove(currentId)">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -60,7 +79,7 @@
                     {id: 3, title: 'Новость 3', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
                     {id: 4, title: 'Новость 4', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
                     {id: 5, title: 'Новость 5', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 6, title: 'Новость 6', description: 'Some quick прпарапрexмисмисмисмample text to build on the card title and make up the bulk of the card\'s content.', date: '01.05.2023'},
+                    {id: 6, title: 'Новость 6', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
                 ],
                 showForms: false,
                 newsObj : {
@@ -68,12 +87,14 @@
                     title: '',
                     description: '',
                     date: ''
-                }
+                },
+                currentId: '',
             }
         },
         methods : {
             add_News(news) {
                 const newNews = JSON.parse(JSON.stringify(news));
+                newNews.id = new Date().getTime();
                 this.news.unshift(newNews);
                 this.newsObj.title = '';
                 this.newsObj.id = '';
@@ -82,12 +103,20 @@
             },
 
             edit(item) {
-                this.newsObj.title = item.title;
-                this.newsObj.description = item.description;
-                this.newsObj.date = item.date;
+                const newNews = JSON.parse(JSON.stringify(item));
+                this.newsObj.id = newNews.id;
+                this.newsObj.title = newNews.title;
+                this.newsObj.description = newNews.description;
+                this.newsObj.date = newNews.date;
             },
+
             redirectToDetails(item) {
                 this.$router.push(`/news/details/${item.id}`)
+            },
+
+            remove(itemId) {
+                const id = itemId;
+                this.news = this.news.filter(el => el.id !== id);
             }
         }
     }
