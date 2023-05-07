@@ -16,7 +16,7 @@
                     <h5 class="card-title">{{item.title}}</h5>
                     <p class="card-text" style="height: 70px; ">{{item.description}}</p>
                     <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
-                    <button type="button" class="btn btn-primary" @click.stop ="redirectToDetails(item)">Подробнее</button>
+                    <button type="button" class="btn btn-outline-primary" @click.stop ="redirectToDetails(item)">Подробнее</button>
                     <br>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.stop ="edit(item)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal" @click.stop="this.currentId = item.id"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
@@ -129,6 +129,11 @@
 
             redirectToDetails(item) {
                 this.$router.push(`/news/details/${item.id}`)
+                // this.$router.push({
+                //     name: 'DetailsNews',
+                //     params: { id: item.id },
+                //     state: { newsItem: item }
+                // });
             },
 
             remove(itemId) {

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light curs bi" style="background-image: url('images/background.jpg')">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light curs bi" style="background-image: url('/images/background.jpg')">
         <div class="container-fluid">
             <a class="navbar-brand" @click="this.$router.push('/')"><img :src="path" alt="" width="55" height="35" class="d-inline-block align-text-top"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
