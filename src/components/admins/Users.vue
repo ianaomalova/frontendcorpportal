@@ -9,18 +9,42 @@
                     <th>Логин</th>
                     <th>Пароль</th>
                     <th>Удалить</th>
+                    <th>Редактировать</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(user, index) in listOfUsers" :key="user.id">
-                    <td v-for="key in columns">
-                        {{user[key]}}
-                    </td>
-                    <td><button type="button" class="btn" @click="remove(index)"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.login"></td>
+                    <td v-else>{{user.login}}</td>
+                    <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.password"></td>
+                    <td v-else>{{user.password}}</td>
+                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="currentIndex = index"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
+                    <td v-if="editNow === false"><button type="button" class="btn"  @click="edit(index)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
+                    <td v-if="editNow === true"><button type="button" class="btn" @click="save"><img src="icons/check_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Удалить пользователя</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить пользователя?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remove(currentIndex)">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -40,12 +64,25 @@
 
                 ],
                 columns : ['id', 'name', 'login', 'password'],
+                currentUser: {},
+                editIndex: '',
+                editNow: false,
+                currentIndex: '',
 
             }
         },
         methods: {
             remove(index) {
                 this.listOfUsers.splice(index, 1);
+            },
+            edit(index) {
+                this.editNow = true;
+                this.editIndex = index;
+                //alert(this.currentUser.name);
+            },
+            save() {
+                this.editNow = false;
+                this.editIndex = '';
             }
         }
 
