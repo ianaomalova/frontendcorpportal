@@ -1,7 +1,7 @@
 <template>
     <h1>Панель администратора</h1>
     <div>
-        <table class="table table-bordered border-primary" style="max-width: 60%">
+        <table class="table table-bordered border-primary" style="max-width: 60%; margin-left: 30px">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -20,7 +20,7 @@
                     <td v-else>{{user.login}}</td>
                     <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.password"></td>
                     <td v-else>{{user.password}}</td>
-                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="currentIndex = index"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
+                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="deleteInit(index,user)"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
                     <td v-if="editNow === false"><button type="button" class="btn"  @click="edit(index)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
                     <td v-if="editNow === true"><button type="button" class="btn" @click="save"><img src="icons/check_FILL0_wght400_GRAD0_opsz24.png" alt=""></button></td>
                 </tr>
@@ -35,11 +35,38 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Вы действительно хотите удалить пользователя?
+                    Вы действительно хотите удалить пользователя {{currentUser.name}}?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remove(currentIndex)">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Добавить пользователя
+    </button>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="ФИО: " v-model="newUser.name">
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Логин: " v-model="newUser.login">
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Пароль: " v-model="newUser.password">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addUser">Добавить</button>
                 </div>
             </div>
         </div>
@@ -68,12 +95,16 @@
                 editIndex: '',
                 editNow: false,
                 currentIndex: '',
+                newUser: {},
+
 
             }
         },
         methods: {
             remove(index) {
                 this.listOfUsers.splice(index, 1);
+                this.currentUser = {};
+                this.currentIndex = '';
             },
             edit(index) {
                 this.editNow = true;
@@ -83,6 +114,15 @@
             save() {
                 this.editNow = false;
                 this.editIndex = '';
+            },
+            deleteInit(index, user) {
+                this.currentIndex = index;
+                this.currentUser = user;
+            },
+            addUser() {
+                this.newUser.id = this.listOfUsers.length + 1;
+                this.listOfUsers.push(this.newUser);
+                this.newUser = {};
             }
         }
 
