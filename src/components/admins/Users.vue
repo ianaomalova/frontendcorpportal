@@ -37,7 +37,14 @@
                 <tr v-for="(user, index) in filteredUsers" :key="user.id">
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
-                    <td>{{user.role}}</td>
+                    <td v-if="editIndex === index && editNow === true">
+                        <select class="form-control w-auto" v-model="user.role">
+                            <option value="Пользователь">Пользователь</option>
+                            <option value="Суперюзер">Суперюзер</option>
+                            <option value="Администратор">Администратор</option>
+                        </select>
+                    </td>
+                    <td v-else>{{user.role}}</td>
                     <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.login"></td>
                     <td v-else>{{user.login}}</td>
                     <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.password"></td>
@@ -82,6 +89,14 @@
                     <input type="text" class="form-control" placeholder="ФИО: " v-model="newUser.name">
                 </div>
                 <div class="modal-body">
+<!--                    <input type="text" class="form-control" placeholder="Роль: " v-model="newUser.role">-->
+                    <select class="form-select w-auto" v-model="newUser.role">
+                        <option value="Пользователь">Пользователь</option>
+                        <option value="Суперюзер">Суперюзер</option>
+                        <option value="Администратор">Администратор</option>
+                    </select>
+                </div>
+                <div class="modal-body">
                     <input type="text" class="form-control" placeholder="Логин: " v-model="newUser.login">
                 </div>
                 <div class="modal-body">
@@ -119,9 +134,12 @@
                 editIndex: '',
                 editNow: false,
                 currentIndex: '',
-                newUser: {},
+                newUser: {
+                    role: 'Пользователь',
+                },
                 searchQuery: '',
-                filteredType: ''
+                filteredType: '',
+                selectForNewUser: 'Пользователь'
             }
         },
         methods: {
