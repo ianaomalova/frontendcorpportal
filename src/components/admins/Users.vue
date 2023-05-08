@@ -1,5 +1,12 @@
 <template>
     <h1>Панель администратора</h1>
+    <div class="input-group" style="max-width: 300px; margin-bottom: 25px; margin-left: 15px">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><img src="icons/search_FILL0_wght400_GRAD0_opsz24.png" alt=""></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery">
+
+    </div>
     <div>
         <table class="table table-bordered border-primary" style="max-width: 60%; margin-left: 30px">
             <thead>
@@ -13,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(user, index) in listOfUsers" :key="user.id">
+                <tr v-for="(user, index) in filteredUsers" :key="user.id">
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.login"></td>
@@ -96,8 +103,7 @@
                 editNow: false,
                 currentIndex: '',
                 newUser: {},
-
-
+                searchQuery: '',
             }
         },
         methods: {
@@ -123,6 +129,11 @@
                 this.newUser.id = this.listOfUsers.length + 1;
                 this.listOfUsers.push(this.newUser);
                 this.newUser = {};
+            }
+        },
+        computed: {
+            filteredUsers() {
+                return this.listOfUsers.filter(el => el.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
             }
         }
 
