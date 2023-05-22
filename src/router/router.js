@@ -11,6 +11,8 @@ import News from "@/views/News";
 import Ads from "@/views/Ads"
 import DetailsNews from "@/views/DetailsNews";
 import Admin from "@/views/Admin.vue";
+import Teachers from "@/views/Teachers";
+import TeachesrDetails from "@/views/TeachesrDetails";
 
 const routes = [
   // {
@@ -58,6 +60,14 @@ const routes = [
   {
     path: '/admin',
     component: Admin
+  },
+  {
+    path: '/teachers',
+    component: Teachers
+  },
+  {
+    path: '/teachers/details/:name',
+    component: TeachesrDetails
   }
 
 

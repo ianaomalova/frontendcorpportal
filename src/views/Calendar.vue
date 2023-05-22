@@ -29,9 +29,9 @@
                 },
                 events: [
                     {
-                        title: "Meeting",
+                        title: "Сдача инд. планов",
                         with: "Владислав Чеканин",
-                        time: { start: "2023-03-26 10:00", end: "2023-03-26 11:00" },
+                        time: { start: "2023-05-10 10:00", end: "2023-05-10 11:00" },
                         color: "blue",
                         id: "1",
                         isEditable: true,

@@ -14,7 +14,7 @@
                         </a>
                         <ul class="dropdown-menu" >
                             <li><a class="dropdown-item" @click="$event=>this.$router.push('/news')">Новости</a></li>
-                            <li><a class="dropdown-item" @click="$event=>this.$router.push('/ads')">Объявления</a></li>
+                            <li><a class="dropdown-item" @click="$event=>this.$router.push('/teachers')">Сотрудники</a></li>
                         </ul>
                     </li>
                     <li v-if="access" class="nav-item ">
