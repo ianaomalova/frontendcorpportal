@@ -55,8 +55,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавить сотрудника</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel" v-if="currentId === ''">Добавить сотрудника</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" v-else >Редактировать сотрудника</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="clear"></button>
                 </div>
                 <div class="modal-body">
                     <input class="form-control" type="text" placeholder="ФИО: " v-model="newTeacher.name">
@@ -87,7 +88,7 @@
                     Вы действительно хотите удалить <b>{{currentUser}}</b>?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="clear">Отмена</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remove(currentId)">Удалить</button>
                 </div>
             </div>
@@ -203,10 +204,10 @@
                 this.newTeacher.subjects = this.newTeacher.subjects.split('\n');
                 const newTeach = JSON.parse(JSON.stringify(newTeacher));
                 newTeach.id = new Date().getTime();
-                this.teachers.push(newTeach);
+                this.teachers.unshift(newTeach);
                 this.newTeacher.position = '';
                 this.newTeacher.name = '';
-                this.newTeacher.image = '';
+                // this.newTeacher.image = '';
                 this.newTeacher.subjects = '';
                 this.newTeacher.title = '';
             },
@@ -230,6 +231,15 @@
                 this.newTeacher.title = newTeach.title;
                 this.newTeacher.position = newTeach.position;
                 this.newTeacher.subjects = newTeach.subjects.join('\n');
+            },
+            clear() {
+                this.currentId = '';
+                this.currentUser = '';
+                this.newTeacher.id = '';
+                this.newTeacher.position = '';
+                this.newTeacher.name = '';
+                this.newTeacher.subjects = '';
+                this.newTeacher.title = '';
             }
         }
 
