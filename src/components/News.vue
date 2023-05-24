@@ -37,7 +37,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Добавить новость</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -86,12 +86,12 @@
         data() {
             return {
                 news: [
-                    {id: 1, title: 'Булка', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 2, title: 'булка 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 3, title: 'Хлебушек', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 4, title: 'Носок', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 5, title: 'Чаечек', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 6, title: 'Хлебушек 2', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 1, title: 'Первая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 2, title: 'Вторая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 3, title: 'Третья новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 4, title: 'Четвертая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 5, title: 'Пятая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 6, title: 'Шестая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
                 ],
                 showForms: false,
                 newsObj : {

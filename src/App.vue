@@ -24,14 +24,15 @@
         // this.disciplines = ['Технические средства информационных систем',
         //   'Программирование',
         //   'Управление проектами', 'ООП']
-        //const response =  await getDisciplines();
-        const str = 'Чеканин В. А.'
-        const response = await getSubjects({FIO : str});
+        const response =  await getDisciplines();
+        // const str = 'Чеканин В. А.'
+        // const response = await getSubjects({FIO : str});
         const dt = response.data;
         this.disciplines = dt;
 
       },
       checkLoginStatus() {
+        localStorage.setItem('isLoggedIn', 'true');
         const isLoggedIn = this.$store.getters.isLoggedIn;
         const isLog = localStorage.getItem('isLoggedIn')
         if (isLoggedIn || isLog) {

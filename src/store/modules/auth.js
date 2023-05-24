@@ -8,6 +8,7 @@ export default {
     },
     actions: {
        async axiosLogIn(ctx, form) {
+           console.log('login')
            const login = form.login;
            const password = form.password;
            // const response = await axios.get("https://localhost:5001/authorization", {
