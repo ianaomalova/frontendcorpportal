@@ -114,7 +114,7 @@
                     {
                         id: 4,
                         name: "Бычкова Наталья Александровна",
-                        image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                        image: "https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png",
                         position: "Доцент, к.т.н",
                         title: "",
                         description: "",
@@ -127,7 +127,7 @@
                     {
                         id: 3,
                         name: "Елисеева Наталья Владимировна",
-                        image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                        image: "https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png",
                         position: "Доцент, к.т.н",
                         title: "",
                         description: "",
@@ -153,7 +153,7 @@
                     {
                         id: 5,
                         name: 'Колясинская Елена Зигмундовна',
-                        image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                        image: "https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png",
                         position: 'Ст. преподаватель',
                         title: '',
                         description: '',
