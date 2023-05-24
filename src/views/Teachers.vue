@@ -15,7 +15,7 @@
                         <div class="col-md-4">
                             <!-- Картинка преподавателя -->
                             <img :src="teacher.image" alt="Преподаватель" class="card-img" style="margin-left: 10px; margin-top: 10px; margin-bottom: 15px">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.stop ="edit(item)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.stop ="edit(teacher)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal" @click.stop="removeInit(teacher)"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                         </div>
                         <div class="col-md-8">
@@ -62,7 +62,7 @@
                     <input class="form-control" type="text" placeholder="ФИО: " v-model="newTeacher.name">
                 </div>
                 <div class="modal-body">
-                    <textarea class="form-control" placeholder="Должность, звание: " v-model="newTeacher.position"></textarea>
+                    <input class="form-control" placeholder="Должность, звание: " v-model="newTeacher.position">
                 </div>
                 <div class="modal-body">
                     <textarea class="form-control" placeholder="Читаемые дисциплины (каждая строка - отдельная дисциплина): " v-model="newTeacher.subjects"></textarea>
@@ -220,6 +220,16 @@
             removeInit(teacher) {
                 this.currentId = teacher.id;
                 this.currentUser = teacher.name;
+            },
+            edit(teacher) {
+                this.currentId = teacher.id;
+                const newTeach = JSON.parse(JSON.stringify(teacher));
+                console.log(newTeach.subjects);
+                this.newTeacher.id = newTeach.id;
+                this.newTeacher.name = newTeach.name;
+                this.newTeacher.title = newTeach.title;
+                this.newTeacher.position = newTeach.position;
+                this.newTeacher.subjects = newTeach.subjects.join('\n');
             }
         }
 
