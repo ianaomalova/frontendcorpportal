@@ -14,7 +14,9 @@
                     <div class="row no-gutters">
                         <div class="col-md-4">
                             <!-- Картинка преподавателя -->
-                            <img :src="teacher.image" alt="Преподаватель" class="card-img" style="margin-left: 10px; margin-top: 10px">
+                            <img :src="teacher.image" alt="Преподаватель" class="card-img" style="margin-left: 10px; margin-top: 10px; margin-bottom: 15px">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.stop ="edit(item)"><img src="icons/edit_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal" @click.stop="removeInit(teacher)"><img src="icons/delete_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -54,9 +56,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Добавить сотрудника</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input class="form-control" type="text" placeholder="ФИО: " v-model="newTeacher.name">
@@ -72,6 +72,23 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" @click="addTeacher(newTeacher)" data-bs-dismiss="modal">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Удалить сотрудника</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить <b>{{currentUser}}</b>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remove(currentId)">Удалить</button>
                 </div>
             </div>
         </div>
@@ -167,7 +184,8 @@
                     title: '',
                     subjects: ''
                 },
-                currentId: ''
+                currentId: '',
+                currentUser: ''
 
             };
         },
@@ -178,6 +196,10 @@
         },
         methods: {
             addTeacher(newTeacher) {
+                if(this.currentId !== '') {
+                    this.remove(this.currentId);
+                    this.currentId = '';
+                }
                 this.newTeacher.subjects = this.newTeacher.subjects.split('\n');
                 const newTeach = JSON.parse(JSON.stringify(newTeacher));
                 newTeach.id = new Date().getTime();
@@ -187,6 +209,17 @@
                 this.newTeacher.image = '';
                 this.newTeacher.subjects = '';
                 this.newTeacher.title = '';
+            },
+            remove(ItemId) {
+                const id = ItemId;
+                this.teachers = this.teachers.filter(el => el.id !== id);
+                this.currentId = '';
+                this.currentUser = '';
+
+            },
+            removeInit(teacher) {
+                this.currentId = teacher.id;
+                this.currentUser = teacher.name;
             }
         }
 
