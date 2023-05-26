@@ -60,6 +60,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="clear"></button>
                 </div>
                 <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Ссылка на изображение" v-model="newTeacher.image">
+                </div>
+                <div class="modal-body">
                     <input class="form-control" type="text" placeholder="ФИО: " v-model="newTeacher.name">
                 </div>
                 <div class="modal-body">
@@ -74,6 +77,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" @click="addTeacher(newTeacher)" data-bs-dismiss="modal">Добавить</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -180,7 +184,7 @@
                 newTeacher: {
                     id: new Date().getTime(),
                     name: '',
-                    image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+                    image: '',
                     position: '',
                     title: '',
                     subjects: ''
@@ -210,6 +214,7 @@
                 // this.newTeacher.image = '';
                 this.newTeacher.subjects = '';
                 this.newTeacher.title = '';
+                this.newTeacher.image = '';
             },
             remove(ItemId) {
                 const id = ItemId;
@@ -230,6 +235,7 @@
                 this.newTeacher.name = newTeach.name;
                 this.newTeacher.title = newTeach.title;
                 this.newTeacher.position = newTeach.position;
+                this.newTeacher.image = newTeach.image;
                 this.newTeacher.subjects = newTeach.subjects.join('\n');
             },
             clear() {

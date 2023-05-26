@@ -152,12 +152,10 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Добавить студента</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" placeholder="Введите имя студента: " v-on:keyup.enter="addStudent" v-model="newStudent">
+                            <input type="text" class="form-control" placeholder="Введите имя студента: " v-on:keyup.enter="addStudent" v-model="newStudent">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" @click="addStudent" data-bs-dismiss="modal">Сохранить</button>

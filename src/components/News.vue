@@ -24,7 +24,7 @@
             </div>
         </div>
         <div v-else>
-            <h2>Ничего не найдено</h2>
+            <h5>Ничего не найдено...</h5>
         </div>
     </div>
 <!--    <button type="button" class="btn btn-primary" @click="add">Добавить новость</button>-->
@@ -35,7 +35,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавить новость</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" v-if="currentId === ''">Добавить новость</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" v-else>Редактировать новость</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

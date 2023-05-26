@@ -14,27 +14,51 @@
 <!--            <div v-if="errorMessage" style="color: red;">{{ errorMessage }}</div>-->
 <!--        </form>-->
 <!--    </div>-->
-    <div class="photo">
-        <div class="container">
-            <div class="frame">
-                <div style="margin-top: 100px">
-                    <h1 style="color: rgb(255,255,255)">Авторизация</h1>
-                    <form class="form-signin" name="form">
-                        <label  for="username">Логин</label>
-                        <input v-model="username" id="username" class="form-styling" type="text" name="username" placeholder=""/>
-                        <label for="password">Пароль</label>
-                        <input v-model="password" id="password" class="form-styling" type="password" name="password" placeholder=""/>
-                        <div class="btn-animate">
-                            <a @click="login" class="btn-signin" style="color: rgba(255,255,255,.9); background-color: #1059FF">Войти</a>
-                        </div>
-                        <div v-if="errorMessage" style="color: red; margin-top: 90px">{{ errorMessage }}</div>
-                    </form>
-
+    <div class="form">
+        <form class="form-horizontal" @submit.prevent>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Логин</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Логин" name="login" v-model="username">
+                    </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Пароль</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" placeholder="Пароль" name="password" v-model="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10" style="margin-top: 20px">
+                        <button type="submit" class="btn btn-primary"  @click="login">Войти</button>
+                    </div>
+                </div>
+                <div v-if="errorMessage" style="color: red; margin-top: 20px">{{ errorMessage }}</div>
             </div>
-        </div>
+        </form>
     </div>
+<!--    <div class="photo">-->
+<!--        <div class="container">-->
+<!--            <div class="frame">-->
+<!--                <div style="margin-top: 100px">-->
+<!--                    <h1 style="color: rgb(255,255,255)">Авторизация</h1>-->
+<!--                    <form class="form-signin" name="form">-->
+<!--                        <label  for="username">Логин</label>-->
+<!--                        <input v-model="username" id="username" class="form-styling" type="text" name="username" placeholder=""/>-->
+<!--                        <label for="password">Пароль</label>-->
+<!--                        <input v-model="password" id="password" class="form-styling" type="password" name="password" placeholder=""/>-->
+<!--                        <div class="btn-animate">-->
+<!--                            <a @click="login" class="btn-signin" style="color: rgba(255,255,255,.9); background-color: #1059FF">Войти</a>-->
+<!--                        </div>-->
+<!--                        <div v-if="errorMessage" style="color: red; margin-top: 90px">{{ errorMessage }}</div>-->
+<!--                    </form>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </template>
 
@@ -76,6 +100,11 @@
     };
 </script>
 <style scoped>
+    .form form {
+        width: 300px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
     .container {
         width: 100%;
         padding-top: 60px;

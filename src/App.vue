@@ -32,7 +32,7 @@
 
       },
       checkLoginStatus() {
-        localStorage.setItem('isLoggedIn', 'true');
+        //localStorage.setItem('isLoggedIn', 'true');
         const isLoggedIn = this.$store.getters.isLoggedIn;
         const isLog = localStorage.getItem('isLoggedIn')
         if (isLoggedIn || isLog) {

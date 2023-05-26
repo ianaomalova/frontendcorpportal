@@ -1,5 +1,8 @@
 <template>
     <h1>Панель администратора</h1>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Добавить пользователя
+    </button>
     <div class="input-group" style="max-width: 300px; margin-bottom: 25px; margin-left: 15px">
         <div class="input-group-prepend">
             <span class="input-group-text"><img src="icons/search_FILL0_wght400_GRAD0_opsz24.png" alt=""></span>
@@ -65,19 +68,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Вы действительно хотите удалить пользователя {{currentUser.name}}?
+                    Вы действительно хотите удалить пользователя <b>{{currentUser.name}}</b>?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remove(currentIndex)">Удалить</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-        Добавить пользователя
-    </button>
+
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -103,7 +104,7 @@
                     <input type="text" class="form-control" placeholder="Пароль: " v-model="newUser.password">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addUser">Добавить</button>
                 </div>
             </div>
