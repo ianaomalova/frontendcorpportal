@@ -259,4 +259,5 @@
         height: auto;
         border-radius: 50% !important;
     }
+
 </style>

@@ -10,8 +10,9 @@
         <input type="text" class="form-control w-auto" placeholder="Search..." v-model="searchQuery">
         <select class="form-select w-auto" v-model="filteredType">
             <option value="">Все пользователи</option>
-            <option value="Пользователь">Пользователь</option>
+            <option value="Преподаватель">Преподаватель</option>
             <option value="Суперюзер">Суперюзер</option>
+            <option value="Редактор">Редактор</option>
             <option value="Администратор">Администратор</option>
         </select>
     </div>
@@ -39,11 +40,13 @@
             <tbody>
                 <tr v-for="(user, index) in filteredUsers" :key="user.id">
                     <td>{{user.id}}</td>
-                    <td>{{user.name}}</td>
+                    <td v-if="editIndex === index && editNow === true"><input class="form-control" type="text" v-model="user.name"></td>
+                    <td v-else>{{user.name}}</td>
                     <td v-if="editIndex === index && editNow === true">
                         <select class="form-control w-auto" v-model="user.role">
-                            <option value="Пользователь">Пользователь</option>
+                            <option value="Преподаватель">Преподаватель</option>
                             <option value="Суперюзер">Суперюзер</option>
+                            <option value="Редактор">Редактор</option>
                             <option value="Администратор">Администратор</option>
                         </select>
                     </td>
@@ -92,8 +95,9 @@
                 <div class="modal-body">
 <!--                    <input type="text" class="form-control" placeholder="Роль: " v-model="newUser.role">-->
                     <select class="form-select w-auto" v-model="newUser.role">
-                        <option value="Пользователь">Пользователь</option>
+                        <option value="Преподаватель">Преподаватель</option>
                         <option value="Суперюзер">Суперюзер</option>
+                        <option value="Редактор">Редактор</option>
                         <option value="Администратор">Администратор</option>
                     </select>
                 </div>
@@ -119,13 +123,13 @@
             return {
                 listOfUsers: [
                     { id: '1', name: 'Чеканин В.А.', role: 'Суперюзер', position:'Зав. кафедрой', login: 'ChekaninVA', password: 'qfsghy12HHG' },
-                    { id: '2', name: 'Ибатулин М.Ю.', role: 'Пользователь', position:'Зав. кафедрой', login: 'IbatulinMU', password: 'gfgf76OP' },
-                    { id: '3', name: 'Бычкова Н.А.', role: 'Пользователь', position:'Зав. кафедрой', login: 'BichkovaNA', password: 'fgfhgfrvdf56hgf' },
-                    { id: '4', name: 'Елисеева Н.В.', role: 'Пользователь', position:'Зав. кафедрой', login: 'EliseevaNV', password: 'gbmkmjm454HG' },
-                    { id: '5', name: 'Колясинская Е.З', role: 'Пользователь', position:'Зав. кафедрой', login: 'KolyasinskayaEZ', password: 'ofofgjkl66PV' },
-                    { id: '6', name: 'Мешков В.Г.', role: 'Пользователь', position:'Зав. кафедрой', login: 'meshkovVG', password: 'fgfgf5thd34NG' },
-                    { id: '7', name: 'Петров В.Е.', role: 'Пользователь', position:'Зав. кафедрой', login: 'PetrovVE', password: 'lpmkvk65PZX' },
-                    { id: '8', name: 'Овчинников А.И', role: 'Пользователь', position:'Зав. кафедрой', login: 'OvchinnikovAI', password: 'jbicjbgf44GF' },
+                    { id: '2', name: 'Ибатулин М.Ю.', role: 'Преподаватель', position:'Зав. кафедрой', login: 'IbatulinMU', password: 'gfgf76OP' },
+                    { id: '3', name: 'Бычкова Н.А.', role: 'Преподаватель', position:'Зав. кафедрой', login: 'BichkovaNA', password: 'fgfhgfrvdf56hgf' },
+                    { id: '4', name: 'Елисеева Н.В.', role: 'Преподаватель', position:'Зав. кафедрой', login: 'EliseevaNV', password: 'gbmkmjm454HG' },
+                    { id: '8', name: 'Малова Я.И.', role: 'Редактор', position:'Зав. кафедрой', login: 'MalovaYI', password: 'jbicjbgf44GF' },
+                    { id: '5', name: 'Колясинская Е.З', role: 'Преподаватель', position:'Зав. кафедрой', login: 'KolyasinskayaEZ', password: 'ofofgjkl66PV' },
+                    { id: '6', name: 'Мешков В.Г.', role: 'Преподаватель', position:'Зав. кафедрой', login: 'meshkovVG', password: 'fgfgf5thd34NG' },
+                    { id: '7', name: 'Петров В.Е.', role: 'Преподаватель', position:'Зав. кафедрой', login: 'PetrovVE', password: 'lpmkvk65PZX' },
                     { id: '9', name: 'admin', role: 'Администратор', position:'Зав. кафедрой', login: 'admin', password: 'admin'}
 
 
@@ -136,11 +140,11 @@
                 editNow: false,
                 currentIndex: '',
                 newUser: {
-                    role: 'Пользователь',
+                    role: 'Преподаватель',
                 },
                 searchQuery: '',
                 filteredType: '',
-                selectForNewUser: 'Пользователь'
+                selectForNewUser: 'Преподаватель'
             }
         },
         methods: {

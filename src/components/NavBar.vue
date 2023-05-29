@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown dropdown-hover">
-                        <a :class="{active: this.$route.path === '/news' || this.$route.path === '/ads'}"
+                        <a :class="{active: this.$route.path === '/news' || this.$route.path === '/teachers'}"
                            class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             О кафедре
                         </a>

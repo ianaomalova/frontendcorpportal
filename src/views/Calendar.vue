@@ -35,7 +35,7 @@
                         color: "blue",
                         id: "1",
                         isEditable: true,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores assumenda corporis doloremque et expedita molestias necessitatibus quam quas temporibus veritatis. Deserunt excepturi illum nobis perferendis praesentium repudiandae saepe sapiente voluptatem!"
+                        description: "Индивидуальные планы нужно сдать на кафедру до 11:00 10 мая"
                     },
                     {
                         title: "Lunch",

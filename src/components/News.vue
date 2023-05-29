@@ -85,12 +85,12 @@
         data() {
             return {
                 news: [
-                    {id: 1, title: 'Первая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 2, title: 'Вторая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 3, title: 'Третья новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 4, title: 'Четвертая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 5, title: 'Пятая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
-                    {id: 6, title: 'Шестая новость', description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', date: '2023-05-04'},
+                    {id: 1, title: 'Первая новость', description: 'Описание новости 1.', date: '2023-05-01'},
+                    {id: 2, title: 'Вторая новость', description: 'Описание новости 2', date: '2023-05-02'},
+                    {id: 3, title: 'Третья новость', description: 'Описание новости 3', date: '2023-05-03'},
+                    {id: 4, title: 'Четвертая новость', description: 'Описание новости 4', date: '2023-05-04'},
+                    {id: 5, title: 'Пятая новость', description: 'Описание новости 5', date: '2023-05-05'},
+                    {id: 6, title: 'Шестая новость', description: 'Описание новости 6', date: '2023-05-06'},
                 ],
                 showForms: false,
                 newsObj : {
